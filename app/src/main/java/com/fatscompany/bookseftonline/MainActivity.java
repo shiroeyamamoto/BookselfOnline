@@ -4,11 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.fatscompany.bookseftonline.Database.DatabaseManager;
 
+public class MainActivity extends AppCompatActivity {
+    DatabaseManager db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        db = new DatabaseManager(this);
+        db.open();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        db.close();
     }
 }
