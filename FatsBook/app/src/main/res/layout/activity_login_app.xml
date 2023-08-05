@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorSecondary4">
+
+    <com.google.android.material.carousel.MaskableFrameLayout
+        android:id="@+id/maskableFrameLayout"
+        android:layout_width="405dp"
+        android:layout_height="258dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imgView"
+            android:layout_width="405dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="4dp"
+
+            android:clickable="false"
+            android:focusable="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.333"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </com.google.android.material.carousel.MaskableFrameLayout>
+
+    <com.google.android.material.button.MaterialButton
+
+        android:id="@+id/mbtnBack"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:backgroundTint="@color/colorSecondary1"
+        app:icon="@drawable/sharp_arrow_back_24"
+        app:iconTint="@android:color/white"
+        app:layout_constraintStart_toStartOf="@+id/imgView"
+        app:layout_constraintTop_toTopOf="@+id/imgView" />
+
+    <LinearLayout
+
+        android:id="@+id/linearLayout"
+        android:layout_width="407dp"
+        android:layout_height="471dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgView"
+        app:layout_constraintVertical_bias="0.974">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="@string/welcome_back"
+            android:textSize="34sp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.54"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="@string/login_to_your_account"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textLayout1"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:hint="Account name"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text"
+                app:helperText="Required *"
+
+                app:helperTextTextColor="@color/colorSecondary1"
+                app:hintTextColor="@color/colorSecondary3"
+                app:startIconDrawable="@drawable/baseline_account_circle_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtInAcc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textLayoutPassworld"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:hint="Password"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconDrawable="@drawable/baseline_visibility_off_24"
+                app:endIconMode="password_toggle"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/baseline_error_outline_24"
+                app:helperText="Required *"
+
+                app:helperTextTextColor="@color/colorSecondary1"
+                app:hintTextColor="@color/colorSecondary3"
+                app:startIconDrawable="@drawable/baseline_lock_24"
+
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtInPas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/colorSecondary1"
+                android:elevation="8dp"
+                android:gravity="center"
+                android:text="Login"
+                app:cornerRadius="50dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Dont ave account! Click ==> " />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSignup"
+                    style="@style/Widget.Material3.Button.TextButton.Dialog.Flush"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SIGN UP" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
