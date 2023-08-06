@@ -1,4 +1,4 @@
-package com.fatscompany.bookseftonline.View;
+package com.fatscompany.bookseftonline.Utils;
 
 import android.content.Intent;
 import android.os.Bundle;
