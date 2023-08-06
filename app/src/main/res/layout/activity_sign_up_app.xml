@@ -14,10 +14,10 @@
 
     <ImageView
         android:id="@+id/imgSignUp"
-        android:layout_width="416dp"
-        android:layout_height="261dp"
+        android:layout_width="419dp"
+        android:layout_height="109dp"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp" />
+        tools:layout_editor_absoluteX="-2dp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="415dp"
@@ -48,6 +48,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="8dp"
+
                 app:helperText="Requided *"
                 app:helperTextTextColor="@color/colorSecondary2"
                 app:layout_constraintBaseline_toTopOf="parent"
@@ -56,9 +57,11 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="55dp"
                     android:drawableStart="@drawable/baseline_account_circle_24"
-                    android:hint=" First Name" />
+                    android:drawablePadding="10dp"
+                    android:hint="First Name"
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -76,9 +79,12 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="55dp"
                     android:drawableStart="@drawable/baseline_account_circle_24"
-                    android:hint=" Last Name" />
+
+                    android:drawablePadding="10dp"
+                    android:hint="Last Name"
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -96,9 +102,12 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="55dp"
                     android:drawableStart="@drawable/baseline_email_24"
-                    android:hint=" Email" />
+
+                    android:drawablePadding="10dp"
+                    android:hint="Email"
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -116,9 +125,12 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="55dp"
                     android:drawableStart="@drawable/baseline_phone_24"
-                    android:hint=" Phone Number" />
+
+                    android:drawablePadding="10dp"
+                    android:hint="Phone Number"
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -136,9 +148,12 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="55dp"
                     android:drawableStart="@drawable/baseline_account_circle_24"
-                    android:hint=" Acccount Name" />
+
+                    android:drawablePadding="10dp"
+                    android:hint="Acccount Name"
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -151,13 +166,20 @@
                 android:layout_marginBottom="8dp"
                 app:helperText="Requided *"
                 app:helperTextTextColor="@color/colorSecondary2"
+
                 app:layout_constraintTop_toBottomOf="@id/txtLayout1"
-                app:startIconDrawable="@drawable/baseline_lock_24">
+
+                >
+
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:hint=" Password" />
+                    android:layout_height="55dp"
+                    android:drawableStart="@drawable/baseline_lock_24"
+
+                    android:drawablePadding="10dp"
+                    android:hint="Password"
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
