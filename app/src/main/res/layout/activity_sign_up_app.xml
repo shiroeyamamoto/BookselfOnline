@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+ >
 
     <Button
         android:id="@+id/btnSignUpBack"
@@ -24,15 +25,18 @@
         android:layout_height="630dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgSignUp"
-        tools:layout_editor_absoluteX="1dp">
+        tools:layout_editor_absoluteX="1dp"
+        android:clickable="false"
+        android:focusable="false">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="703dp">
+            android:layout_width="404dp"
+            android:layout_height="691dp">
 
             <Button
                 android:id="@+id/btnSignUp"
-                style="@android:style/Widget.Material.Light.Button.Inset"
+                android:clickable="true"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/colorSecondary1"
@@ -56,6 +60,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signUpFName"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:drawableStart="@drawable/baseline_account_circle_24"
@@ -78,10 +83,11 @@
                 app:layout_constraintTop_toBottomOf="@id/txtLayoutFName">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signUpLName"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    android:drawableStart="@drawable/baseline_account_circle_24"
 
+                    android:drawableStart="@drawable/baseline_account_circle_24"
                     android:drawablePadding="10dp"
                     android:hint="Last Name"
                     android:singleLine="true" />
@@ -101,10 +107,11 @@
                 app:layout_constraintTop_toBottomOf="@id/txtLayoutLName">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signUpEmail"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    android:drawableStart="@drawable/baseline_email_24"
 
+                    android:drawableStart="@drawable/baseline_email_24"
                     android:drawablePadding="10dp"
                     android:hint="Email"
                     android:singleLine="true" />
@@ -125,10 +132,11 @@
                 app:layout_constraintTop_toBottomOf="@id/txtLayoutEmail">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signUpSDT"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    android:drawableStart="@drawable/baseline_phone_24"
 
+                    android:drawableStart="@drawable/baseline_phone_24"
                     android:drawablePadding="10dp"
                     android:hint="Phone Number"
                     android:singleLine="true" />
@@ -142,17 +150,18 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="8dp"
-                app:helperText="Requided *"
                 android:gravity="center"
+                app:helperText="Requided *"
                 app:helperTextTextColor="@color/colorSecondary2"
                 app:layout_constraintBottom_toTopOf="@id/txtLayout2"
                 app:layout_constraintTop_toBottomOf="@id/txtLayoutSDT">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signUpAName"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    android:drawableStart="@drawable/baseline_account_circle_24"
 
+                    android:drawableStart="@drawable/baseline_account_circle_24"
                     android:drawablePadding="10dp"
                     android:hint="Acccount Name"
                     android:singleLine="true" />
@@ -162,12 +171,13 @@
                 android:id="@+id/txtLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="8dp"
-                android:layout_gravity="center"
                 android:gravity="center"
+                app:endIconMode="password_toggle"
                 app:helperText="Requided *"
                 app:helperTextTextColor="@color/colorSecondary2"
 
@@ -177,12 +187,13 @@
 
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signUpPw"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:drawableStart="@drawable/baseline_lock_24"
-
                     android:drawablePadding="10dp"
                     android:hint="Password"
+                    android:inputType="textPassword"
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.fatscompany.bookseftonline.Database.DatabaseController;
 import com.fatscompany.bookseftonline.R;
+import com.fatscompany.bookseftonline.databinding.ActivityLoginAppBinding;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -24,27 +26,25 @@ public class Login extends AppCompatActivity {
     private TextInputEditText editPass;
     private Button btnSignUp;
     private Button btnBack;
+
+    private ActivityLoginAppBinding binding;
+    private DatabaseController db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_app);
-        btnBack = findViewById(R.id.mbtnBack);
-        imgView = findViewById(R.id.imgView);
-        txtAccount = findViewById(R.id.textLayout1);
-        txtPassworld = findViewById(R.id.textLayoutPassworld);
-        editAccount = findViewById(R.id.txtInAcc);
-        editPass = findViewById(R.id.txtInPas);
-        btnSignUp = findViewById(R.id.btnSignup);
+        binding = ActivityLoginAppBinding.inflate(getLayoutInflater());
+        View v =  binding.getRoot();
+        setContentView(v);
 
-        Glide.with(this).load(R.drawable.logo).into(imgView);
+        Glide.with(this).load(R.drawable.logo).into(binding.imgView);
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        binding.mbtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Login.this,"ON CLICK",Toast.LENGTH_SHORT).show();
             }
         });
-        editAccount.addTextChangedListener(new TextWatcher() {
+        binding.txtInAcc.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -52,11 +52,11 @@ public class Login extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(editAccount.length() >=20){
-                    txtAccount.setError("Nhập ít thôi thằng nguu");
+                if(binding.txtInAcc.length() >=20){
+                    binding.textLayout1.setError("Nhập ít thôi thằng nguu");
                 }
-                else if(editAccount.length() <20){
-                    txtAccount.setError(null);
+                else if(binding.txtInAcc.length() <20){
+                    binding.textLayout1.setError(null);
                 }
             }
 
@@ -65,7 +65,20 @@ public class Login extends AppCompatActivity {
 
             }
         });
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
+        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String user = binding.txtInAcc.getText().toString();
+                String pw = binding.txtInPas.getText().toString();
+                db = new DatabaseController(Login.this);
+
+                Boolean flag = db.checkUser(user,pw);
+                if(flag){
+                    Toast.makeText(Login.this, "hay lam dmm", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        binding.btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent =  new Intent(Login.this, SignUp.class);
