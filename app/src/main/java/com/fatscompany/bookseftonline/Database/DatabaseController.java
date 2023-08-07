@@ -41,4 +41,8 @@ public class DatabaseController extends SQLiteOpenHelper {
         public void onUpgrade(SQLiteDatabase db, int i, int i1) {
 
         }
+
+        public void addUser(){
+
+        }
 }
