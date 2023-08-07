@@ -53,7 +53,6 @@ public class SignUp extends AppCompatActivity {
                 Toast.makeText(SignUp.this, "Tạo tài khỏan thành công", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignUp.this,Login.class);
                 startService(intent);
-
             }
         });
     }
