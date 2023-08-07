@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 
+import java.sql.Time;
+
 public class DatabaseAdapter extends BaseAdapter {
     private DatabaseController dbHelper;
     private SQLiteDatabase database;
@@ -16,21 +18,50 @@ public class DatabaseAdapter extends BaseAdapter {
         dbHelper = new DatabaseController(context);
     }
 
-    private void open() throws SQLException {
-       database = dbHelper.getWritableDatabase();
+//    private void open() throws SQLException {
+//       database = dbHelper.getWritableDatabase();
+//    }
+
+//    private void close() {
+//        dbHelper.close();
+//    }
+
+    public void CheckUser(String username, String pw){
+        dbHelper.CheckUser(username,pw);
     }
 
-    private void close() {
-        dbHelper.close();
+    public void InsertUser(String username, String pass, String firstName, String lastName,
+                           String email, String phone, Boolean active, String userole){
+        dbHelper.InsertUser(username, pass, firstName,lastName, email, phone,active, userole);
     }
 
-    public void checkUser(String username, String pw){
-        dbHelper.checkUser(username,pw);
+    public void InsertBook(String title, String decription, double price, String author, String pubYear,
+                           Boolean condition, int cateId, int publisherId, String image){
+        dbHelper.InsertBook(title, decription, price,author, pubYear, condition,cateId, publisherId,image);
     }
 
-    public void insertUser(String username, String pass, String firstName, String lastName, String email, String phone){
-        dbHelper.insertUser(username, pass, firstName,lastName, email, phone);
+    public void InsertPublisher(String username){
+        dbHelper.InsertPublisher(username);
     }
+
+    public void InsertCategory(String cateName, String decription){
+        dbHelper.InsertCategory(cateName, decription);
+    }
+
+    public void InsertSaleOrder(Time createdDate, int userId){
+        dbHelper.InsertSaleOrder(createdDate, userId);
+    }
+
+    public void InsertInventory(int stock, int bookId){
+        dbHelper.InsertInventory(stock,bookId);
+    }
+
+    public void InsertOrderDetail(String name, int bookId, int saleOrderId, int amount){
+        dbHelper.InsertOrderDetail(name, bookId, saleOrderId,amount);
+    }
+
+
+
 
     @Override
     public int getCount() {

@@ -37,6 +37,8 @@ public class SignUp extends AppCompatActivity {
                 String phone = binding.signUpSDT.getText().toString();
                 String acName = binding.signUpAName.getText().toString();
                 String pw = binding.signUpPw.getText().toString();
+                Boolean active = false;
+                String userole = "CUSTOMER";
 
                 if (FName.isEmpty() || LName.isEmpty() || email.isEmpty() || phone.isEmpty() || acName.isEmpty() || pw.isEmpty()){
                     Toast.makeText(SignUp.this, "Nhập đủ dữ liệu đcmm", Toast.LENGTH_SHORT).show();
@@ -44,7 +46,7 @@ public class SignUp extends AppCompatActivity {
                 }
 
                 dbAdapter = new DatabaseAdapter(SignUp.this);
-                dbAdapter.insertUser(acName,pw,FName,LName,email,phone);
+                dbAdapter.insertUser(acName,pw,FName,LName,email,phone,active,userole);
                 Toast.makeText(SignUp.this, "Tạo tài khỏan thành công", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignUp.this,Login.class);
                 startService(intent);

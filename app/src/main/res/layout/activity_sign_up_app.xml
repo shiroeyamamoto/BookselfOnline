@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:icon="@drawable/sharp_arrow_back_24" />
-
     <ImageView
         android:id="@+id/imgSignUp"
         android:layout_width="419dp"
