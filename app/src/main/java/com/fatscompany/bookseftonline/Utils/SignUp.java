@@ -37,7 +37,7 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String FName  = binding.signUpFName.getText().toString();
-               String LName = binding.signUpLName.getText().toString();
+                String LName = binding.signUpLName.getText().toString();
                 String email= binding.signUpEmail.getText().toString();
                 String phone = binding.signUpSDT.getText().toString();
                 String acName = binding.signUpAName.getText().toString();
