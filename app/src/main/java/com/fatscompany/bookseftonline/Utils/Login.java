@@ -65,7 +65,7 @@ public class Login extends AppCompatActivity {
                 String pw = binding.txtInPas.getText().toString();
                 db = new DatabaseController(Login.this);
 
-                Boolean flag = db.checkUser(user,pw);
+                Boolean flag = db.CheckUser(user,pw);
                 if(flag){
                     Toast.makeText(Login.this, "hay lam dmm", Toast.LENGTH_SHORT).show();
                 }

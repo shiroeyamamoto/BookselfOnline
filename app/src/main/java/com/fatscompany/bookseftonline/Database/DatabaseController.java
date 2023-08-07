@@ -1,5 +1,6 @@
 package com.fatscompany.bookseftonline.Database;
 
+import static com.fatscompany.bookseftonline.Database.Settings.TABLE_NAME_01;
 import static com.fatscompany.bookseftonline.Database.Settings.TABLE_NAME_06;
 
 import android.content.ContentValues;
@@ -7,6 +8,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseController extends SQLiteOpenHelper {
     static final String DATABASE_NAME = "bookseftdb.db";
@@ -54,7 +62,7 @@ public class DatabaseController extends SQLiteOpenHelper {
         db.execSQL(q);
 
         q = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_06 + " (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                Settings.COLUMN_ID +"INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 Settings.COLUMN_USERNAME + " TEXT NOT NULL, " +
                 Settings.COLUMN_PASSWORD + " TEXT NOT NULL, " +
                 Settings.COLUMN_FIRSTNAME + " TEXT NOT NULL, " +
@@ -66,7 +74,7 @@ public class DatabaseController extends SQLiteOpenHelper {
         db.execSQL(q);
 
         q = "CREATE TABLE IF NOT EXISTS " + Settings.TABLE_NAME_05 + " (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                Settings.COLUMN_ID +"INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 Settings.COLUMN_CREATED_DATE + " DATETIME NOT NULL, " +
                 Settings.COLUMN_USER_ID + " INTEGER NOT NULL, " +
                 "FOREIGN KEY (" + Settings.COLUMN_USER_ID + ") REFERENCES " +
@@ -77,7 +85,7 @@ public class DatabaseController extends SQLiteOpenHelper {
                 Settings.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 Settings.COLUMN_NAME + " TEXT NOT NULL, " +
                 Settings.COLUMN_BOOK_ID + " INTEGER NOT NULL, " +
-                "sale_orderid INTEGER NOT NULL, " +
+                Settings.COLUMN_SALEORDER_ID+" INTEGER NOT NULL, " +
                 Settings.COLUMN_AMOUNT + " INTEGER NOT NULL, " +
                 "FOREIGN KEY (" + Settings.COLUMN_SALEORDER_ID + ") REFERENCES " +
                 Settings.TABLE_NAME_05 + " (" + Settings.COLUMN_ID + ") ON DELETE NO ACTION ON UPDATE NO ACTION, " +
@@ -99,7 +107,37 @@ public class DatabaseController extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
 
     }
-    public void insertUser(String username, String pass, String firstName, String lastName, String email, String phone) {
+
+    public long  InsertOrderDetail(String name, int bookId, int saleOrderId, int amount) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Settings.COLUMN_NAME, name);
+        values.put(Settings.COLUMN_BOOK_ID, bookId);
+        values.put(Settings.COLUMN_SALEORDER_ID, saleOrderId);
+        values.put(Settings.COLUMN_AMOUNT, amount);
+        long newRowId = db.insert(Settings.TABLE_NAME_04, null, values);
+        db.close();
+        return  newRowId;
+    }
+    public long  InsertInventory(int stock, int bookId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Settings.COLUMN_STOCK, stock);
+        values.put(Settings.COLUMN_BOOK_ID, bookId);
+        long newRowId = db.insert(Settings.TABLE_NAME_03, null, values);
+        db.close();
+        return  newRowId;
+    }
+    public long  InsertSaleOrder(Time createdDate, int userId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Settings.COLUMN_CREATED_DATE, createdDate.getTime());
+        values.put(Settings.COLUMN_USER_ID, userId);
+        long newRowId = db.insert(Settings.TABLE_NAME_05, null, values);
+        db.close();
+        return  newRowId;
+    }
+    public long InsertUser(String username, String pass, String firstName, String lastName, String email, String phone, Boolean active, String userole ) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Settings.COLUMN_USERNAME, username);
@@ -108,18 +146,87 @@ public class DatabaseController extends SQLiteOpenHelper {
         values.put(Settings.COLUMN_LASTNAME, lastName);
         values.put(Settings.COLUMN_EMAIL, email);
         values.put(Settings.COLUMN_PHONE, phone);
-        values.put(Settings.COLUMN_ACTIVE, "1");
-        values.put(Settings.COLUMN_USEROLE, "NV");
+        values.put(Settings.COLUMN_ACTIVE, active);
+        values.put(Settings.COLUMN_USEROLE, userole);
+
         long newRowId = db.insert(Settings.TABLE_NAME_06, null, values);
         db.close();
+        return  newRowId;
+    }
+    public long  InsertCategory(String cateName, String decription) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Settings.COLUMN_NAME, cateName);
+        values.put(Settings.COLUMN_DECRIPTION, cateName);
+        long newRowId = db.insert(Settings.TABLE_NAME_02, null, values);
+        db.close();
+        return  newRowId;
     }
 
-    public boolean checkUser(String username, String pw) {
+    public long  InsertPublisher(String cateName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Settings.COLUMN_NAME, cateName);
+        long newRowId = db.insert(Settings.TABLE_NAME_07, null, values);
+        db.close();
+        return  newRowId;
+    }
+
+    public long  InsertBook(String title, String decription, double price, String author, String pubYear,
+                                 Boolean condition, int cateId, int publisherId, String image) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Settings.COLUMN_TITLE, title);
+        values.put(Settings.COLUMN_DECRIPTION, decription);
+        values.put(Settings.COLUMN_PRICE, price);
+        values.put(Settings.COLUMN_AUTHORS, author);
+        values.put(Settings.COLUMN_PUBLICATION_YEAR, pubYear);
+        values.put(Settings.COLUMN_CONDITION, condition);
+        values.put(Settings.COLUMN_CATEGORY_ID, cateId);
+        values.put(Settings.COLUMN_PUBLISHER_ID, publisherId);
+        values.put(Settings.COLUMN_IMAGE, image);
+        long newRowId = db.insert(Settings.TABLE_NAME_01, null, values);
+        db.close();
+        return  newRowId;
+    }
+
+
+    public boolean CheckUser(String username, String pw) {
         SQLiteDatabase db = this.getReadableDatabase();
         SQLiteDatabase MyDB = this.getWritableDatabase();
         Cursor cursor = MyDB.rawQuery("SELECT * FROM " + Settings.TABLE_NAME_06 +
                         " WHERE " + Settings.COLUMN_USERNAME + " = ? AND " + Settings.COLUMN_PASSWORD + " = ?",
                 new String[]{username, pw});
+        cursor.close();
+        db.close();
         return cursor.getCount() > 0;
+    }
+
+    public void selectBook() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<String> list = new ArrayList<>();
+        Cursor cursor = db.query(TABLE_NAME_01, null, null, null, null, null, null);
+
+        if(cursor!=null && cursor.moveToFirst()){
+                do{
+                    int id = cursor.getInt(cursor.getColumnIndex(Settings.COLUMN_ID));
+                    String title = cursor.getString(cursor.getColumnIndex(Settings.COLUMN_TITLE));
+                    String decription = cursor.getString(cursor.getColumnIndex(Settings.COLUMN_DECRIPTION));
+                    double price = cursor.getDouble(cursor.getColumnIndex(Settings.COLUMN_PRICE));
+                    String author = cursor.getString(cursor.getColumnIndex(Settings.COLUMN_AUTHORS));
+                    String pubYear = cursor.getString(cursor.getColumnIndex(Settings.COLUMN_PUBLICATION_YEAR));
+                    byte[] condition = cursor.getBlob(cursor.getColumnIndex(Settings.COLUMN_CONDITION));
+                    int cateId = cursor.getInt(cursor.getColumnIndex(Settings.COLUMN_CATEGORY_ID));
+                    int publisherId = cursor.getInt(cursor.getColumnIndex(Settings.COLUMN_PUBLISHER_ID));
+                    String image = cursor.getString(cursor.getColumnIndex(Settings.COLUMN_IMAGE));
+
+                    list.add(id + ", "+title + ", "+decription + ", "+price + ", "+author + ", "+pubYear + ", "+
+                            condition + ", "+cateId + ", "+publisherId + ", "+image);
+                }while(cursor.moveToNext());
+
+        }
+        cursor.close();
+        db.close();
+        //return cursor.getCount() > 0;
     }
 }
