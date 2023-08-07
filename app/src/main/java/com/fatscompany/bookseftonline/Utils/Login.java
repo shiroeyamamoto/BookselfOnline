@@ -19,13 +19,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class Login extends AppCompatActivity {
-    private ImageView imgView;
-    private TextInputLayout txtAccount;
-    private TextInputLayout txtPassworld;
-    private TextInputEditText editAccount;
-    private TextInputEditText editPass;
-    private Button btnSignUp;
-    private Button btnBack;
 
     private ActivityLoginAppBinding binding;
     private DatabaseController db;

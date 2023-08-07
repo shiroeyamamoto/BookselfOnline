@@ -45,7 +45,6 @@ public class DatabaseController extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
 
     }
-
     public void insertUser(String username, String pass, String firstName, String lastName, String email, String phone) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -67,6 +66,6 @@ public class DatabaseController extends SQLiteOpenHelper {
         Cursor cursor = MyDB.rawQuery("SELECT * FROM " + Settings.TABLE_NAME_06 +
                         " WHERE " + Settings.COLUMN_USERNAME + " = ? AND " + Settings.COLUMN_PASSWORD + " = ?",
                 new String[]{username, pw});
-            return cursor.getCount() > 0;
+        return cursor.getCount() > 0;
     }
 }
