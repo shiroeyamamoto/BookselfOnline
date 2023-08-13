@@ -1,46 +1,61 @@
 package com.fatscompany.bookseftonline;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.MenuItem;
+import android.view.View;
 
-import com.fatscompany.bookseftonline.Admin.HomeFragment;
-import com.fatscompany.bookseftonline.Admin.ProfileFragment;
-import com.fatscompany.bookseftonline.Admin.ToolsFragment;
-import com.fatscompany.bookseftonline.databinding.AcitvityAdminBinding;
-public class AdminActivity extends AppCompatActivity {
+import com.fatscompany.bookseftonline.databinding.ActivityAdminBinding;
+import com.google.android.material.navigation.NavigationView;
 
-    AcitvityAdminBinding binding;
+public class AdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ActivityAdminBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_admin);
 
-        binding = AcitvityAdminBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        // mac dinh la home
-        replaceFragment(new HomeFragment());
+        binding = ActivityAdminBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+        setSupportActionBar(binding.adminToolBar);
+        /*
+        toggle = new ActionBarDrawerToggle(
+            this, drawlayout cua admin (trang ben ngoai), materialToolbar (cai menu truot),
+            R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        );*/
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, binding.adminDrawerlayout, binding.adminToolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        binding.adminDrawerlayout.addDrawerListener(toggle);
+        toggle.syncState();
 
-
-        binding.adminBottomNav.setOnItemSelectedListener(item -> {
-            if(item.getItemId() == 0){
-                replaceFragment(new HomeFragment());
-                return true;
-            }
-            else if (item.getItemId() == 1){
-                replaceFragment(new ToolsFragment());
-                return true;
-            }
-            else if (item.getItemId() == 2){
-                replaceFragment(new ProfileFragment());
-                return true;
-            }
-            return true;
-        });
+        binding.adminNav.setNavigationItemSelectedListener(this);
+        binding.adminNav.bringToFront();
     }
 
-    private void replaceFragment(Fragment fragment){
-        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
+
+    /* khong cho out app khi back pressed */
+    @Override
+    public void onBackPressed() {
+        if (binding.adminDrawerlayout.isDrawerOpen(GravityCompat.START)){
+            binding.adminDrawerlayout.closeDrawer(GravityCompat.START);
+        }
+        else super.onBackPressed();
+
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        return true;
     }
 }
