@@ -18,13 +18,13 @@ public class DatabaseAdapter extends BaseAdapter {
         dbHelper = new DatabaseController(context);
     }
 
-//    private void open() throws SQLException {
-//       database = dbHelper.getWritableDatabase();
-//    }
+    public void open() throws SQLException {
+       database = dbHelper.getWritableDatabase();
+    }
 
-//    private void close() {
-//        dbHelper.close();
-//    }
+    public void close() {
+        dbHelper.close();
+    }
 
     public void CheckUser(String username, String pw){
         dbHelper.CheckUser(username,pw);

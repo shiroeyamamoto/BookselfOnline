@@ -46,7 +46,7 @@ public class SignUp extends AppCompatActivity {
                 }
 
                 dbAdapter = new DatabaseAdapter(SignUp.this);
-                dbAdapter.insertUser(acName,pw,FName,LName,email,phone,active,userole);
+                dbAdapter.InsertUser(acName,pw,FName,LName,email,phone,active,userole);
                 Toast.makeText(SignUp.this, "Tạo tài khỏan thành công", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignUp.this,Login.class);
                 startService(intent);
