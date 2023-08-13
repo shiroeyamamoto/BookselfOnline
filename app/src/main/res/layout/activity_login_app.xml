@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorSecondary4">
+   >
 
     <com.google.android.material.carousel.MaskableFrameLayout
         android:id="@+id/maskableFrameLayout"
-        android:layout_width="405dp"
-        android:layout_height="258dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -36,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:backgroundTint="@color/colorSecondary1"
+
         app:icon="@drawable/sharp_arrow_back_24"
         app:iconTint="@android:color/white"
         app:layout_constraintStart_toStartOf="@+id/imgView"
@@ -53,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgView"
+
         app:layout_constraintVertical_bias="0.974">
 
         <com.google.android.material.textview.MaterialTextView
@@ -96,8 +97,7 @@
                 app:endIconMode="clear_text"
                 app:helperText="Required *"
 
-                app:helperTextTextColor="@color/colorSecondary1"
-                app:hintTextColor="@color/colorSecondary3"
+
                 app:startIconDrawable="@drawable/baseline_account_circle_24">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -125,8 +125,7 @@
                 app:errorIconDrawable="@drawable/baseline_error_outline_24"
                 app:helperText="Required *"
 
-                app:helperTextTextColor="@color/colorSecondary1"
-                app:hintTextColor="@color/colorSecondary3"
+
                 app:startIconDrawable="@drawable/baseline_lock_24"
 
                 >
@@ -147,7 +146,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
-                android:backgroundTint="@color/colorSecondary1"
+
                 android:elevation="8dp"
                 android:gravity="center"
                 android:text="Login"
