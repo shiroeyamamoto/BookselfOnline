@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:title="View statistics" />
+        <item
+            android:id="@+id/user_management"
+            android:title="user_management" />
+        <item
+            android:id="@+id/product_management"
+            android:title="product_management" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/profile"
+            android:title="Profile" />
+        <item
+            android:id="@+id/login"
+            android:title="Log out" />
+    </group>
+
+
+</menu>
