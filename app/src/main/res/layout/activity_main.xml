@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
+<<<<<<< HEAD
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
 
@@ -33,4 +33,27 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/main_bottom_nav" />
 
+=======
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintBottom_toTopOf="@id/homeNavView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+
+        android:id="@+id/homeNavView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:menu="@menu/home_btom_nav" />
+>>>>>>> 420f460af12c2e31017169facac17bda80b37aed
 </androidx.constraintlayout.widget.ConstraintLayout>

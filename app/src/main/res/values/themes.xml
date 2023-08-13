@@ -2,7 +2,10 @@
 <resources>
     <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:fontFamily">@font/roboto</item>
+<<<<<<< HEAD
         <item name="cornerRadius">4dp</item>
+=======
+>>>>>>> 420f460af12c2e31017169facac17bda80b37aed
         <item name="colorPrimary">@color/md_theme_light_primary</item>
         <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
