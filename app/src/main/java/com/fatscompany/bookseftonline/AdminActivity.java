@@ -16,7 +16,6 @@ public class AdminActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = AcitvityAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         // mac dinh la home
