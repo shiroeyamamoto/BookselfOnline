@@ -26,7 +26,7 @@ public class Settings {
 
     //order_detail
     protected static final String TABLE_NAME_04="order_detail";
-    protected static final String COLUMN_SALEORDER_ID="sale_orderid";
+    protected static final String COLUMN_SALEORDER_ID="sale_order_id";
     protected static final String COLUMN_AMOUNT="amount";
 
     //sale_order
