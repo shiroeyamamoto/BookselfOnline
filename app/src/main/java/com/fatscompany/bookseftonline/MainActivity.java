@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseAdapter db;
     private ActivityMainBinding binding;
     private ViewPagerAdapter viewPagerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,15 +29,13 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         db = new DatabaseAdapter(this);
         db.open();
-
-
         setContentView(view);
         setSupportActionBar(binding.toolbar);
         replaceViewPager(0);
         binding.navbottom.setOnItemSelectedListener(item -> {
 
             if (item.getItemId() == R.id.home) {
-             binding.viewPager2.setCurrentItem(0);
+                binding.viewPager2.setCurrentItem(0);
             } else if (item.getItemId() == R.id.favorite) {
                 binding.viewPager2.setCurrentItem(1);
             } else {
@@ -48,10 +47,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_nav_top, menu);
         return true;
     }
+
     private void replaceViewPager(int position) {
         viewPagerAdapter = new ViewPagerAdapter(this);
         binding.viewPager2.setAdapter(viewPagerAdapter);
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
