@@ -1,17 +1,19 @@
 package com.fatscompany.bookseftonline;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.fatscompany.bookseftonline.FragmentCode.AdminStatisticFrag;
+import com.fatscompany.bookseftonline.FragmentCode.AdminUserManagementFrag;
 import com.fatscompany.bookseftonline.databinding.ActivityAdminBinding;
 import com.google.android.material.navigation.NavigationView;
 
@@ -38,8 +40,13 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         binding.adminDrawerlayout.addDrawerListener(toggle);
         toggle.syncState();
 
+
         binding.adminNav.setNavigationItemSelectedListener(this);
         binding.adminNav.bringToFront();
+
+        // mac dinh la statistic
+        binding.adminNav.setCheckedItem(R.id.statistic);
+        replaceFragment(new AdminStatisticFrag());
     }
 
 
@@ -55,7 +62,23 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int itemID = item.getItemId();
 
+        if (itemID == R.id.statistic){
+            replaceFragment(new AdminStatisticFrag());
+        }
+        else if (itemID == R.id.user_management) {
+            replaceFragment(new AdminUserManagementFrag());
+        }
+
+        binding.adminDrawerlayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.AdminFragLayout, fragment);
+        fragmentTransaction.commit();
     }
 }
