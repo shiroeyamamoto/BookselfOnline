@@ -201,7 +201,13 @@ public class DatabaseController extends SQLiteOpenHelper {
         db.close();
         return cursor.getCount() > 0;
     }
+    public Cursor getListBook() {
+        String query = "SELECT * FROM " + TABLE_NAME_01;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query , null);
 
+        return cursor;
+    }
     public void selectBook() {
         SQLiteDatabase db = this.getReadableDatabase();
         List<String> list = new ArrayList<>();
