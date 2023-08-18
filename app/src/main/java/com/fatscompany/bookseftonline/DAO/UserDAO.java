@@ -18,6 +18,8 @@ public interface UserDAO {
     @Query("SELECT * FROM User WHERE id=:id")
     User findById(String id);
 
+    @Query("SELECT * FROM USER WHERE username=:username AND password = :password")
+    User checkUser(String username, String password);
     @Insert
     void insert(User... users);
 

@@ -27,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
-        db = new DatabaseAdapter(this);
-        db.open();
+
         setContentView(view);
         setSupportActionBar(binding.toolbar);
         replaceViewPager(0);
