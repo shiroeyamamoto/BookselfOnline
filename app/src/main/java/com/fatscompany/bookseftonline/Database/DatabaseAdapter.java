@@ -1,12 +1,16 @@
 package com.fatscompany.bookseftonline.Database;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import java.sql.Time;
 
@@ -60,7 +64,9 @@ public class DatabaseAdapter extends BaseAdapter {
         dbHelper.InsertOrderDetail(name, bookId, saleOrderId,amount);
     }
 
+    public void displayUser(){
 
+    }
 
 
     @Override
