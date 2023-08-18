@@ -128,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
 
-                    android:text="Save" />
+                    android:text="Add" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

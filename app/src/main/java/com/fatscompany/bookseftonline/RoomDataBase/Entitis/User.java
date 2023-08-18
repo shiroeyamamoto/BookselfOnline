@@ -1,4 +1,4 @@
-package com.fatscompany.bookseftonline.Entitis;
+package com.fatscompany.bookseftonline.RoomDataBase.Entitis;
 
 import androidx.room.ColumnInfo;
 import androidx.room.PrimaryKey;

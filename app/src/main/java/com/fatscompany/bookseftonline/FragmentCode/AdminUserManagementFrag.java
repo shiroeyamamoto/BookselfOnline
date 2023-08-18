@@ -67,17 +67,17 @@ public class AdminUserManagementFrag extends Fragment {
         String sdt = addUserBinding.txtSDT.getText().toString();
         Boolean active = true;
         if (uName.isEmpty() || pw.isEmpty()){
-            Toast.makeText(requireContext(), "Vui lòng nhập đầy đủ", Toast.LENGTH_SHORT).show();
-            return;
+            Toast.makeText(requireContext(), "Please fill out the fields", Toast.LENGTH_SHORT).show();
         }
+        else{
+            try {
+                dbAdapter = new DatabaseAdapter(requireContext());
+                dbAdapter.InsertUser(uName, pw, fName, lName, mail, sdt, active, role);
+                Toast.makeText(requireContext(), "Added successfully", Toast.LENGTH_SHORT).show();
 
-        try {
-            dbAdapter = new DatabaseAdapter(requireContext());
-            dbAdapter.InsertUser(uName, pw, fName, lName, mail, sdt, active, role);
-            Toast.makeText(requireContext(), "Added user successfully", Toast.LENGTH_SHORT).show();
-
-        }catch (Exception ex){
-            Toast.makeText(requireContext(), "Unknown errors", Toast.LENGTH_SHORT).show();
+            }catch (Exception ex){
+                Toast.makeText(requireContext(), "Unknown errors", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
