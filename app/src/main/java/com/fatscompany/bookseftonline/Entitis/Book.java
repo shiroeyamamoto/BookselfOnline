@@ -32,8 +32,10 @@ public class Book {
     private int publisherId;
     @ColumnInfo(name = "image")
     private String image;
+    @ColumnInfo(name = "soldBook")
+    private int soldBook;
 
-    public Book(String title, String description, double price, String authors, int publicationYear, boolean condition, int categoryId, int publisherId, String image) {
+    public Book(String title, String description, double price, String authors, int publicationYear, boolean condition, int categoryId, int publisherId, String image, int soldBook) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -43,14 +45,7 @@ public class Book {
         this.categoryId = categoryId;
         this.publisherId = publisherId;
         this.image = image;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.soldBook = soldBook;
     }
 
     public String getTitle() {
@@ -123,5 +118,13 @@ public class Book {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int getSoldBook() {
+        return soldBook;
+    }
+
+    public void setSoldBook(int soldBook) {
+        this.soldBook = soldBook;
     }
 }

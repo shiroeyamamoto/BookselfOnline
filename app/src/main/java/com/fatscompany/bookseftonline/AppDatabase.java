@@ -24,7 +24,7 @@ import com.fatscompany.bookseftonline.Entitis.Publishers;
 import com.fatscompany.bookseftonline.Entitis.SaleOrder;
 import com.fatscompany.bookseftonline.Entitis.User;
 
-@Database(entities = {OrderDetail.class, Publishers.class, SaleOrder.class, Inventory.class, User.class, Book.class, Category.class}, version = 1, exportSchema = false)
+@Database(entities = {OrderDetail.class, Publishers.class, SaleOrder.class, Inventory.class, User.class, Book.class, Category.class}, version = 1, exportSchema = true)
 @TypeConverters(DateTypeConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
 

@@ -13,7 +13,8 @@ import java.util.List;
 public interface CategoryDAO {
     @Query("SELECT * FROM category ")
     List<Category> selectAll();
-
+    @Query("SELECT * FROM category where name = :name ")
+    Category checkCateExits(String name);
     @Query("SELECT * FROM Category WHERE id=:id")
     Category findById(String id);
 

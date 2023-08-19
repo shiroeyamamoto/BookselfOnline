@@ -7,6 +7,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 import androidx.room.Delete;
 
+import com.fatscompany.bookseftonline.Entitis.Category;
 import com.fatscompany.bookseftonline.Entitis.Publishers;
 
 import java.util.List;
@@ -25,5 +26,9 @@ public interface PublishersDAO {
 
     @Query("SELECT * FROM Publishers")
     List<Publishers> getAllPublishers();
+
+    @Query("SELECT * FROM Publishers where name = :name ")
+    Publishers checkPublisherExits(String name);
+
 
 }
