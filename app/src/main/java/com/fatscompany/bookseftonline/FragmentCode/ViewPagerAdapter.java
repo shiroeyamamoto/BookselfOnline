@@ -3,7 +3,6 @@ package com.fatscompany.bookseftonline.FragmentCode;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
@@ -18,17 +17,16 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new MainHome();
+                return new FragmentMainHome();
             case 1:
                 return new MainFavorite();
             case 2:
                 return new MainMore();
             default:
-                return new MainHome();
-
+                throw new IllegalArgumentException("Invalid position: " + position);
         }
-
     }
+
 
     @Override
     public int getItemCount() {
