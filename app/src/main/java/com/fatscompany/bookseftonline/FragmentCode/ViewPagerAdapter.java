@@ -22,6 +22,8 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
                 return new MainFavorite();
             case 2:
                 return new MainMore();
+            case 3:
+                return new SearchFragment();
             default:
                 throw new IllegalArgumentException("Invalid position: " + position);
         }

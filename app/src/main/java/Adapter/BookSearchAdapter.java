@@ -16,38 +16,42 @@ import com.fatscompany.bookseftonline.R;
 
 import java.util.List;
 
-public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> implements View.OnClickListener {
+public class BookSearchAdapter extends RecyclerView.Adapter<BookSearchAdapter.BookSearchViewHolder> implements View.OnClickListener {
     List<Book> myListBook;
     Context context;
     public ItemOnClickListener itemOnClickListener;
 
-    public BookAdapter(Context context, List<Book> myListBook) {
+    public BookSearchAdapter(Context context, List<Book> myListBook) {
 
         this.context = context;
         this.myListBook = myListBook;
     }
 
-    /// định nghĩa những view đã khai báo trong item
 
+    @Override
+    public void onClick(View v) {
+
+    }
 
     @NonNull
     @Override
-    public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_book, parent, false);
-        return new BookViewHolder(view);
+    public BookSearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_book_result, parent, false);
+        return new BookSearchViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BookSearchViewHolder holder, int position) {
         Book myBook = myListBook.get(position);
         if (myBook == null)
             return;
-
+        holder.txtTitle.setText(myBook.getTitle());
+        holder.txtAuthor.setText(myBook.getAuthors());
 
         Glide.with(holder.itemView.getContext())
                 .load(myBook.getImage())
-                .placeholder(R.drawable.favorite) // Tùy chọn: Ảnh tạm thời trong quá trình tải
-                .error(R.drawable.logo) // Tùy chọn: Ảnh hiển thị khi xảy ra lỗi tải
+                .placeholder(R.drawable.favorite)
+                .error(R.drawable.logo)
                 .into(holder.imgVBook1);
     }
 
@@ -59,23 +63,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         return 0;
     }
 
-
-    public void setOnClick(ItemOnClickListener ic) {
-        this.itemOnClickListener = ic;
-    }
-
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    class BookViewHolder extends RecyclerView.ViewHolder {
+    class BookSearchViewHolder extends RecyclerView.ViewHolder {
         //// trong này thì sẽ ánh xạ view
         private ImageView imgVBook1; /// khai báo cái này để thằng viewHolder biết để show cái quần què gì ra rồi dùng nó ánh xạ vào cái viewholder
         private TextView txtTitle;
         private TextView txtAuthor;
 
-        public BookViewHolder(@NonNull View itemView) {
+        public BookSearchViewHolder(@NonNull View itemView) {
             super(itemView);
             imgVBook1 = itemView.findViewById(R.id.imgVBook);
             txtTitle = itemView.findViewById(R.id.txtTitle);
