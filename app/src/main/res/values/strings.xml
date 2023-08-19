@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fat Boys Bookstore</string>
+    <string name="app_name"></string>
     <string name="btn_Login">Login</string>
     <string name="welcome">WELCOME TO YOU</string>
     <string name="welcome_back">Welcome Back !</string>

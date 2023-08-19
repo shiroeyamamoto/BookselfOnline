@@ -23,10 +23,12 @@
             View view = binding.getRoot();
 
 
+
             setContentView(view);
             setSupportActionBar(binding.toolbar);
             replaceViewPager(0);
             binding.navbottom.setOnItemSelectedListener(item -> {
+
 
                 if (item.getItemId() == R.id.home) {
                     binding.viewPager2.setCurrentItem(0);

@@ -10,6 +10,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
+import com.fatscompany.bookseftonline.RoomDataBase.Entitis.User;
+
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Time;
@@ -201,7 +203,13 @@ public class DatabaseController extends SQLiteOpenHelper {
         db.close();
         return cursor.getCount() > 0;
     }
+    public Cursor getListBook() {
+        String query = "SELECT * FROM " + TABLE_NAME_01;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query , null);
 
+        return cursor;
+    }
     public void selectBook() {
         SQLiteDatabase db = this.getReadableDatabase();
         List<String> list = new ArrayList<>();
@@ -228,5 +236,25 @@ public class DatabaseController extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         //return cursor.getCount() > 0;
+    }
+
+    public List<User> getAllUsers() {
+        List<User> userList = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM users", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                User user = new User(
+                        cursor.getString(cursor.getColumnIndex(Settings.COLUMN_USERNAME)),
+                        cursor.getString(cursor.getColumnIndex(Settings.COLUMN_PASSWORD)),
+                );
+                userList.add(user);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return userList;
     }
 }
