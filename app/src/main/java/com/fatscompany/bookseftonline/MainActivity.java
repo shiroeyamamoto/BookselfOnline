@@ -1,3 +1,4 @@
+
 package com.fatscompany.bookseftonline;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
             if (id == R.id.action_search) {
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
                 startActivity(intent);
-
                 return true;
             }
             return false;
