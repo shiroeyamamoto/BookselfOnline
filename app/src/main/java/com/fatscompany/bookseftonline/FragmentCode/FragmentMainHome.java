@@ -38,9 +38,10 @@ public class FragmentMainHome extends Fragment {
     }
 
     private List<Book> myLBook;
+    private List<Book> bestSellerBook;
     private List<Category> cates;
 
-    private BookAdapter bookAdapter;
+    private BookAdapter bookAdapter, bestSellerAdapter;
     private CategoryAdapter categoryAdapter;
 
     @Override
@@ -50,13 +51,15 @@ public class FragmentMainHome extends Fragment {
         // Thiết lập LayoutManager
         LinearLayoutManager bookLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager categoryLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager bookSoldLayout = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
 
         // Tìm RecyclerView bằng findViewById
         RecyclerView rcv = view.findViewById(R.id.rcvDisplayBook);
+        RecyclerView rcvBestSeller = view.findViewById(R.id.rcvBestSeller);
         RecyclerView rcvCate = view.findViewById(R.id.rcvCategory);
         rcv.setLayoutManager(bookLayoutManager);
         rcvCate.setLayoutManager(categoryLayoutManager);
-
+        rcvBestSeller.setLayoutManager(bookSoldLayout);
 
         Executor executor = Executors.newSingleThreadExecutor();
         executor.execute(new Runnable() {
@@ -69,15 +72,17 @@ public class FragmentMainHome extends Fragment {
                     public void run() {
                         myLBook = database.bookDao().getAllBook();
                         cates = database.categoryDao().selectAll();
-
-                        if (myLBook != null || cates != null) {
+                        bestSellerBook = database.bookDao().getTopSoldBooks();
+                        if (myLBook != null || cates != null || bestSellerBook != null) {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     bookAdapter = new BookAdapter(getContext(), myLBook);
+                                    bestSellerAdapter = new BookAdapter(getContext(), bestSellerBook);
                                     categoryAdapter = new CategoryAdapter(getContext(), cates);
                                     rcvCate.setAdapter(categoryAdapter);
                                     rcv.setAdapter(bookAdapter);
+                                    rcvBestSeller.setAdapter(bestSellerAdapter);
 
                                 }
                             });

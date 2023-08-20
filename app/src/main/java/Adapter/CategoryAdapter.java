@@ -28,6 +28,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CateHo
     @Override
     public CateHolderView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_category, parent, false);
+        RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) view.getLayoutParams();
+        params.setMargins(16, 16, 16, 16);
+        view.setLayoutParams(params);
+
         return new CategoryAdapter.CateHolderView(view);
     }
 

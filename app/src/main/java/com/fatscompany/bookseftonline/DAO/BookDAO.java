@@ -18,6 +18,9 @@ public interface BookDAO {
     @Query("SELECT * FROM Book WHERE id=:id")
     Book findById(String id);
 
+    @Query("SELECT * FROM Book WHERE title LIKE '%' || :keyword || '%'")
+    List<Book> findByTitleContainingKeyword(String keyword);
+
     @Insert
     void insert(Book... books);
 
@@ -32,4 +35,8 @@ public interface BookDAO {
 
     @Query("SELECT * FROM book WHERE category_id IN (SELECT id FROM category WHERE name = :categoryName)")
     List<Book> getBooksInCategory(String categoryName);
+
+    @Query("SELECT * FROM Book ORDER BY soldBook DESC LIMIT 15")
+    List<Book> getTopSoldBooks();
+
 }
