@@ -10,7 +10,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
-import com.fatscompany.bookseftonline.RoomDataBase.Entitis.User;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -210,51 +209,7 @@ public class DatabaseController extends SQLiteOpenHelper {
 
         return cursor;
     }
-    public void selectBook() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        List<String> list = new ArrayList<>();
-        Cursor cursor = db.query(TABLE_NAME_01, null, null, null, null, null, null);
 
-        if(cursor!=null && cursor.moveToFirst()){
-                do{
-                    int id = cursor.getInt(cursor.getColumnIndex(Settings.COLUMN_ID));
-                    String title = cursor.getString(cursor.getColumnIndex(Settings.COLUMN_TITLE));
-                    String decription = cursor.getString(cursor.getColumnIndex(Settings.COLUMN_DECRIPTION));
-                    double price = cursor.getDouble(cursor.getColumnIndex(Settings.COLUMN_PRICE));
-                    String author = cursor.getString(cursor.getColumnIndex(Settings.COLUMN_AUTHORS));
-                    String pubYear = cursor.getString(cursor.getColumnIndex(Settings.COLUMN_PUBLICATION_YEAR));
-                    byte[] condition = cursor.getBlob(cursor.getColumnIndex(Settings.COLUMN_CONDITION));
-                    int cateId = cursor.getInt(cursor.getColumnIndex(Settings.COLUMN_CATEGORY_ID));
-                    int publisherId = cursor.getInt(cursor.getColumnIndex(Settings.COLUMN_PUBLISHER_ID));
-                    String image = cursor.getString(cursor.getColumnIndex(Settings.COLUMN_IMAGE));
 
-                    list.add(id + ", "+title + ", "+decription + ", "+price + ", "+author + ", "+pubYear + ", "+
-                            condition + ", "+cateId + ", "+publisherId + ", "+image);
-                }while(cursor.moveToNext());
 
-        }
-        cursor.close();
-        db.close();
-        //return cursor.getCount() > 0;
-    }
-
-    public List<User> getAllUsers() {
-        List<User> userList = new ArrayList<>();
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM users", null);
-
-        if (cursor.moveToFirst()) {
-            do {
-
-                User user = new User(
-                        cursor.getString(cursor.getColumnIndex(Settings.COLUMN_USERNAME)),
-                        cursor.getString(cursor.getColumnIndex(Settings.COLUMN_PASSWORD)),
-                );
-                userList.add(user);
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-        return userList;
-    }
 }
