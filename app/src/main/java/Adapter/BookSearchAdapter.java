@@ -19,7 +19,7 @@ import java.util.List;
 public class BookSearchAdapter extends RecyclerView.Adapter<BookSearchAdapter.BookSearchViewHolder> implements View.OnClickListener {
     List<Book> myListBook;
     Context context;
-    public ItemOnClickListener itemOnClickListener;
+    public iClickItemUserListener itemOnClickListener;
 
     public BookSearchAdapter(Context context, List<Book> myListBook) {
 
