@@ -1,29 +1,40 @@
 package Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.fatscompany.bookseftonline.Entitis.Book;
 import com.fatscompany.bookseftonline.Entitis.User;
 import com.fatscompany.bookseftonline.R;
+import com.fatscompany.bookseftonline.databinding.UpdateUserBinding;
 
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
+    private final iClickItemUserListener iClickItemUserListener;
     List<User> listUser;
     Context context;
 
-    public UserAdapter(List<User> listUser, Context context) {
+    private iClickItemUserListener listener;
+
+    private UpdateUserBinding updateUserBinding;
+
+    public UserAdapter(List<User> listUser, Context context, iClickItemUserListener listener) {
         this.listUser = listUser;
         this.context = context;
+        this.iClickItemUserListener = listener;
     }
 
     @NonNull
@@ -41,7 +52,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         holder.imgUser.setImageResource(R.drawable.baseline_account_circle_24);
         holder.txtName.setText(user.getLastName() + " " +user.getFirstName());
         holder.userRole.setText((user.getUserRole()));
+
+        holder.itemUserLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iClickItemUserListener.onClickItemUser(user);
+            }
+        });
     }
+
 
 
     @Override
@@ -56,12 +75,20 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         private ImageView imgUser;
         private TextView txtName;
         private TextView userRole;
+        private CardView userCardView;
+
+        private ConstraintLayout itemUserLayout;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
             imgUser = itemView.findViewById(R.id.imgUser);
             txtName = itemView.findViewById(R.id.txtName);
             userRole = itemView.findViewById(R.id.txtUserRole);
+            itemUserLayout = itemView.findViewById(R.id.item_user_layout);
+            //userCardView = itemView.findViewById(R.id.itemUser);
         }
     }
+
+
 }
+

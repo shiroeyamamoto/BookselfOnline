@@ -4,9 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
-    android:layout_marginBottom="20dp">
+    android:layout_marginBottom="20dp"
+
+    >
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -23,7 +26,7 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/uNameLayout"
+                    android:id="@+id/uNameLayout2"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -34,7 +37,7 @@
                     app:startIconDrawable="@drawable/baseline_person_24">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtuName"
+                        android:id="@+id/txtuName2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="User name"
@@ -42,7 +45,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/passwordLayout"
+                    android:id="@+id/passwordLayout2"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -52,43 +55,43 @@
                     app:startIconDrawable="@drawable/baseline_lock_24">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtpassword"
+                        android:id="@+id/txtpassword2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Password" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/roleLayout"
+                    android:id="@+id/roleLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtRole"
+                        android:id="@+id/txtRole2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Role" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/fNameLayout"
+                    android:id="@+id/fNameLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtfName"
+                        android:id="@+id/txtfName2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="First name" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/lNameLayout"
+                    android:id="@+id/lNameLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtlName"
+                        android:id="@+id/txtlName2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Last name" />
@@ -96,12 +99,12 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/mailLayout"
+                    android:id="@+id/mailLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtMail"
+                        android:id="@+id/txtMail2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Mail" />
@@ -110,24 +113,32 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/sdtLayout"
+                    android:id="@+id/sdtLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtSDT"
+                        android:id="@+id/txtSDT2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Phone number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
-                    android:id="@+id/btnSave"
+                    android:id="@+id/btnUpdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
 
-                    android:text="Add" />
+                    android:text="Update" />
+
+                <Button
+                    android:id="@+id/btnDel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delete"
+                    android:layout_gravity="right"
+                     />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
