@@ -8,10 +8,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.fatscompany.bookseftonline.Entitis.Book;
+import com.fatscompany.bookseftonline.Entitis.User;
 import com.fatscompany.bookseftonline.R;
 
 import java.util.List;
@@ -19,12 +22,18 @@ import java.util.List;
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> implements View.OnClickListener {
     List<Book> myListBook;
     Context context;
-    public iClickItemUserListener itemOnClickListener;
+    public iClickItemBookListener itemOnClickListener;
 
     public BookAdapter(Context context, List<Book> myListBook) {
 
         this.context = context;
         this.myListBook = myListBook;
+    }
+
+    public BookAdapter(List<Book> myListBook, Context context, iClickItemBookListener listener) {
+        this.myListBook = myListBook;
+        this.context = context;
+        this.itemOnClickListener = listener;
     }
 
     /// định nghĩa những view đã khai báo trong item
@@ -49,6 +58,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 .placeholder(R.drawable.favorite) // Tùy chọn: Ảnh tạm thời trong quá trình tải
                 .error(R.drawable.logo) // Tùy chọn: Ảnh hiển thị khi xảy ra lỗi tải
                 .into(holder.imgVBook1);
+
+        /*holder.itemBookLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iClickItemBookListener.onClickItemBook(myBook);
+            }
+        });*/
     }
 
 
@@ -60,7 +76,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     }
 
 
-    public void setOnClick(iClickItemUserListener ic) {
+    public void setOnClick(iClickItemBookListener ic) {
         this.itemOnClickListener = ic;
     }
 
@@ -75,12 +91,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         private TextView txtTitle;
         private TextView txtAuthor;
 
+        private CardView itemBookLayout;
+
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
             imgVBook1 = itemView.findViewById(R.id.imgVBook);
             txtTitle = itemView.findViewById(R.id.txtTitle);
             txtAuthor = itemView.findViewById(R.id.txtAuthor);
-
+            itemBookLayout = itemView.findViewById(R.id.item_user_layout);
         }
     }
 }
