@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -36,7 +37,9 @@ public class SearchActivity extends AppCompatActivity {
         LinearLayoutManager bookLayoutManager = new LinearLayoutManager(SearchActivity.this, LinearLayoutManager.VERTICAL, false);
         RecyclerView rcvResult = findViewById(R.id.rcvResult);
         rcvResult.setLayoutManager(bookLayoutManager);
-
+        Intent i = getIntent();
+        Bundle myBundle = i.getBundleExtra("keySearch");
+        String kw = myBundle.getString("querySearch");
         Executor executor = Executors.newSingleThreadExecutor();
         executor.execute(new Runnable() {
             @Override
@@ -47,7 +50,7 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        myListResult = database.bookDao().findByTitleContainingKeyword("the");
+                        myListResult = database.bookDao().findByTitleContainingKeyword(kw);
                         if (myListResult != null) {
                             SearchActivity.this.runOnUiThread(new Runnable() {
                                 @Override

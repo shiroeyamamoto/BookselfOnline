@@ -15,7 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".CategoryBookResult"
+            android:exported="true"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ActivityForTestLayout"
+            android:exported="true"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".DbData"
             android:exported="true"
@@ -62,7 +69,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Utils.Login"
             android:exported="true"

@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.fatscompany.bookseftonline.Database.DatabaseAdapter;
 import com.fatscompany.bookseftonline.FragmentCode.SearchFragment;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(view);
         setSupportActionBar(binding.toolbar);
         replaceViewPager(0);
+
         binding.toolbar.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
             if (id == R.id.action_search) {
@@ -59,8 +62,36 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_nav_top, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+
+        androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent i = new Intent(MainActivity.this, SearchActivity.class);
+
+                /// tạo bundel để chứa dữ liệu
+                Bundle myBundle = new Bundle();
+                /// thêm dữ kiệu vào bundel
+                myBundle.putString("querySearch", query);
+
+                /// đữa bundel vào intent
+                i.putExtra("keySearch", myBundle);
+                startActivity(i);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                return false;
+            }
+        });
         return super.onCreateOptionsMenu(menu);
+
     }
+
 
     private void replaceViewPager(int position) {
         viewPagerAdapter = new ViewPagerAdapter(this);

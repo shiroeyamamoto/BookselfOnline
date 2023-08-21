@@ -116,7 +116,34 @@ public class DbData extends AppCompatActivity {
                     "Philip Guston Now",
                     "Alice Neel: People Come First",
                     "Bauhaus Typography at 100",
-                    "Ugly’s Electrical References, 2023 Edition"
+                    "Ugly’s Electrical References, 2023 Edition",
+                    "Where Is the Amazon?",
+                    "Where the Lost Wander",
+                    "The Bookstore on the Beach",
+                    "Things We Never Got Over (Knockemout)",
+                    "The Silent Patient",
+                    "Where the Crawdads Sing",
+                    "Verity",
+                    "Love and Other Words",
+                    "Password Book",
+                    "It’s Not Summer Without You",
+                    "Lessons in Chemistry",
+                    "Demon Copperhead",
+                    "The Woman in Me",
+                    "Single AF Cocktails",
+                    "Surviving College",
+                    "Find Your Passion",
+                    "Watching You",
+                    "Spooktacular Jokes and Riddles for Kids 8-12",
+                    "It Will All Work Out",
+                    "The Scenic Route",
+                    "Reminders of Him",
+                    "The Pale-Faced Lie",
+                    "The Girl Who Was Taken",
+                    "White Lies",
+                    "The Covenant of Water",
+                    "The Love of My Life",
+                    "The Butcher and the Wren"
             );
 
             List<String> images;
@@ -154,7 +181,34 @@ public class DbData extends AppCompatActivity {
                     "https://images-na.ssl-images-amazon.com/images/I/61yuonbmB7L._AC_UL300_SR300,200_.jpg",
                     "https://images-na.ssl-images-amazon.com/images/I/61AZjrfYCOL._AC_UL300_SR300,200_.jpg",
                     "https://images-na.ssl-images-amazon.com/images/I/41JQSlc0-CL._AC_UL300_SR300,200_.jpg",
-                    "https://images-na.ssl-images-amazon.com/images/I/51zsbESbYbL._AC_UL600_SR600,400_.jpg"
+                    "https://images-na.ssl-images-amazon.com/images/I/51zsbESbYbL._AC_UL600_SR600,400_.jpg",
+                    "https://m.media-amazon.com/images/I/812z90AMmXL._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/91oj+0Fh8ES._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/81WOdv0GnZS._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/71HsLc-TNlL._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/91BbLCJOruL._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/91pW1-pwF0L._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/917iVfhEhxL._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/719CLtj6ndL._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/71I2tnZ2B8L._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/81sNNdPiKQL._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/71bNmUDdM0L._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/91eIanmV7KL._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/61KI7oL-u9L._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/91r4+mZbTVL._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/71pQsSolcEL._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/71-vS+CfnwL._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/71HrsLqoMJL._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/61paLzfsEIL._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/71ZCvkVlq9L._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/81PxkaGqNkL._AC_UL480_FMwebp_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/61ctngWorgL._AC_UL480_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/61ASAHIZC0L._AC_UL480_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/71XAm8STjSL._AC_UL480_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/61z5u-7YZKL._AC_UL480_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/91b7tm523VL._AC_UL480_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/91BfSqEcRdL._AC_UL480_QL65_.jpg",
+                    "https://m.media-amazon.com/images/I/81Y9XuluekL._AC"
             );
 
             int randomSold = random.nextInt(maxSold - minSold + 1) + minSold;
@@ -167,7 +221,7 @@ public class DbData extends AppCompatActivity {
                     database.runInTransaction(new Runnable() {
                         @Override
                         public void run() {
-                            for (int i = 0; i < 34; i++) {
+                            for (int i = 0; i < 60; i++) {
                                 int randomCategory = (int) (Math.random() * 10) + 1; // Random category between 1 and 10
                                 int randomPublisher = (int) (Math.random() * 5) + 1; // Random publisher between 1 and 5
                                 Book book = new Book(titles.get(i), description, randomPrice, // Random price between 10 and 60
