@@ -34,6 +34,15 @@ public class Book {
     private String image;
     @ColumnInfo(name = "soldBook")
     private int soldBook;
+    private int currentQuantity = 1; // Mặc định số lượng là 1
+
+    public int getCurrentQuantity() {
+        return currentQuantity;
+    }
+
+    public void setCurrentQuantity(int quantity) {
+        currentQuantity = quantity;
+    }
 
     public Book(String title, String description, double price, String authors, int publicationYear, boolean condition, int categoryId, int publisherId, String image, int soldBook) {
         this.title = title;
@@ -46,6 +55,7 @@ public class Book {
         this.publisherId = publisherId;
         this.image = image;
         this.soldBook = soldBook;
+        this.currentQuantity = 1;
     }
 
     public String getTitle() {
