@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
+
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Time;
@@ -201,32 +202,14 @@ public class DatabaseController extends SQLiteOpenHelper {
         db.close();
         return cursor.getCount() > 0;
     }
-
-    public void selectBook() {
+    public Cursor getListBook() {
+        String query = "SELECT * FROM " + TABLE_NAME_01;
         SQLiteDatabase db = this.getReadableDatabase();
-        List<String> list = new ArrayList<>();
-        Cursor cursor = db.query(TABLE_NAME_01, null, null, null, null, null, null);
+        Cursor cursor = db.rawQuery(query , null);
 
-        if(cursor!=null && cursor.moveToFirst()){
-                do{
-                    int id = cursor.getInt(cursor.getColumnIndex(Settings.COLUMN_ID));
-                    String title = cursor.getString(cursor.getColumnIndex(Settings.COLUMN_TITLE));
-                    String decription = cursor.getString(cursor.getColumnIndex(Settings.COLUMN_DECRIPTION));
-                    double price = cursor.getDouble(cursor.getColumnIndex(Settings.COLUMN_PRICE));
-                    String author = cursor.getString(cursor.getColumnIndex(Settings.COLUMN_AUTHORS));
-                    String pubYear = cursor.getString(cursor.getColumnIndex(Settings.COLUMN_PUBLICATION_YEAR));
-                    byte[] condition = cursor.getBlob(cursor.getColumnIndex(Settings.COLUMN_CONDITION));
-                    int cateId = cursor.getInt(cursor.getColumnIndex(Settings.COLUMN_CATEGORY_ID));
-                    int publisherId = cursor.getInt(cursor.getColumnIndex(Settings.COLUMN_PUBLISHER_ID));
-                    String image = cursor.getString(cursor.getColumnIndex(Settings.COLUMN_IMAGE));
-
-                    list.add(id + ", "+title + ", "+decription + ", "+price + ", "+author + ", "+pubYear + ", "+
-                            condition + ", "+cateId + ", "+publisherId + ", "+image);
-                }while(cursor.moveToNext());
-
-        }
-        cursor.close();
-        db.close();
-        //return cursor.getCount() > 0;
+        return cursor;
     }
+
+
+
 }

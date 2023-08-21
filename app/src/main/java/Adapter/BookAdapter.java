@@ -22,7 +22,7 @@ import java.util.List;
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
     List<Book> myListBook;
     Context context;
-    public ItemOnClickListener itemOnClickListener;
+    public iClickItemUserListener itemOnClickListener;
 
     public BookAdapter(Context context, List<Book> myListBook) {
 
@@ -100,7 +100,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     }
 
 
-    public void setOnClick(ItemOnClickListener ic) {
+    public void setOnClick(iClickItemUserListener ic) {
         this.itemOnClickListener = ic;
     }
 

@@ -26,7 +26,7 @@ public class BookSearchAdapter extends RecyclerView.Adapter<BookSearchAdapter.Bo
     private int currentQuantity = 1;
 
     Context context;
-    public ItemOnClickListener itemOnClickListener;
+    public iClickItemUserListener itemOnClickListener;
 
     public BookSearchAdapter(Context context, List<Book> myListBook) {
 

@@ -1,3 +1,4 @@
+
 package com.fatscompany.bookseftonline;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,15 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
         replaceViewPager(0);
 
+        binding.toolbar.setOnMenuItemClickListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.action_search) {
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            return false;
+        });
 
         binding.navbottom.setOnItemSelectedListener(item -> {
 
