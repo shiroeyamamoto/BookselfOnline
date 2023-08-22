@@ -5,26 +5,20 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewbinding.ViewBindings;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.Button;
 
 import com.fatscompany.bookseftonline.AppDatabase;
-import com.fatscompany.bookseftonline.DbData;
 import com.fatscompany.bookseftonline.Entitis.Book;
 import com.fatscompany.bookseftonline.Entitis.Category;
-import com.fatscompany.bookseftonline.MainActivity;
 import com.fatscompany.bookseftonline.R;
-import com.fatscompany.bookseftonline.databinding.ActivityMainBinding;
-import com.fatscompany.bookseftonline.databinding.FragmentMainHomeBinding;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.List;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import Adapter.BookAdapter;
@@ -92,7 +86,25 @@ public class FragmentMainHome extends Fragment {
             }
         });
 
+
+        Button btnSeeAll = (Button) view.findViewById(R.id.btnSeeAll);
+        btnSeeAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openBottomSheet();
+            }
+        });
         return view;
+    }
+
+    private void openBottomSheet() {
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
+
+        View v = LayoutInflater.from(getActivity()).inflate(R.layout.book_detail, null);
+
+        bottomSheetDialog.setContentView(v);
+        bottomSheetDialog.show();
+
     }
 
 

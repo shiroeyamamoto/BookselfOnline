@@ -1,10 +1,15 @@
 package com.fatscompany.bookseftonline.FragmentCode;
 
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.menu.ShowableListMenu;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,17 +18,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fatscompany.bookseftonline.AdminActivity;
 import com.fatscompany.bookseftonline.AppDatabase;
 import com.fatscompany.bookseftonline.Database.DatabaseAdapter;
-import com.fatscompany.bookseftonline.Entitis.User;
 import com.fatscompany.bookseftonline.Entitis.Book;
+import com.fatscompany.bookseftonline.Entitis.Category;
 import com.fatscompany.bookseftonline.R;
+import com.fatscompany.bookseftonline.databinding.AddBookBinding;
+import com.fatscompany.bookseftonline.databinding.AddCategoryBinding;
 import com.fatscompany.bookseftonline.databinding.AddUserBinding;
 import com.fatscompany.bookseftonline.databinding.FragmentAdminProductManagementBinding;
+import com.fatscompany.bookseftonline.databinding.ItemProductBinding;
+import com.fatscompany.bookseftonline.databinding.UpdateBookBinding;
 import com.fatscompany.bookseftonline.databinding.UpdateUserBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -33,27 +43,29 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import Adapter.AdminBookAdapter;
 import Adapter.BookAdapter;
+import Adapter.CateroryViewModel;
+import Adapter.ProducAdapter;
 import Adapter.UserAdapter;
 import Adapter.iClickItemBookListener;
+import Adapter.iClickItemCateListener;
 import Adapter.iClickItemUserListener;
 
 
 public class AdminProductManagement extends Fragment {
 
     private FragmentAdminProductManagementBinding binding;
-    private AddUserBinding addUserBinding;
-    private DatabaseAdapter dbAdapter;
+    private AddBookBinding addBookBinding;
 
-    private List<Book> bookList;
+    private AddCategoryBinding addCategoryBinding;
 
-    private BookAdapter bookAdapter;
+    private List<Category> cateList;
 
+    private ProducAdapter producAdapter;
     private AdminActivity adminActivity;
 
-    private iClickItemUserListener listener;
-
-    private UpdateUserBinding updateBookBinding;
+    private ItemProductBinding itemProductBinding;
 
 
     @Override
@@ -64,12 +76,12 @@ public class AdminProductManagement extends Fragment {
         binding = FragmentAdminProductManagementBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        binding.btnCreateUser.setOnClickListener(v -> {
-            showAddUserContent();
+        binding.btnAddCat.setOnClickListener(v -> {
+            showAddCateContent();
         });
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        RecyclerView rcv = view.findViewById(R.id.userRecyclerView);
+        RecyclerView rcv = view.findViewById(R.id.catRecyclerView);
         rcv.setLayoutManager(linearLayoutManager);
 
         adminActivity = (AdminActivity) getActivity();
@@ -81,19 +93,13 @@ public class AdminProductManagement extends Fragment {
                 database.runInTransaction(new Runnable() {
                     @Override
                     public void run() {
-                        bookList = database.bookDao().getAllBook();
-
-                        if (bookList != null) {
+                        cateList = database.categoryDao().selectAllExceptEmpty();
+                        if (cateList != null) {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    bookAdapter = new BookAdapter(bookList, getContext(), new iClickItemBookListener() {
-                                        @Override
-                                        public void onClickItemBook(Book book) {
-                                            showUpdateContent(book);
-                                        }
-                                    });
-                                    rcv.setAdapter(bookAdapter);
+
+                                    runProductAdapter(getContext(),cateList,rcv, view);
                                 }
                             });
                         }
@@ -101,166 +107,186 @@ public class AdminProductManagement extends Fragment {
                 });
             }
         });
-
-        ItemTouchHelper helper = new ItemTouchHelper(callback);
-        helper.attachToRecyclerView(rcv);
         return view;
     }
+    private void runProductAdapter(Context context, List<Category> cateList, RecyclerView rcv, View view){
+        producAdapter = new ProducAdapter(context,cateList, new iClickItemBookListener() {
+            @Override
+            public void onClickItemBook(List<Book> book) {
+            }
 
-    public void showUpdateContent(Book book){
-        updateBookBinding = UpdateUserBinding.inflate(getLayoutInflater());
-        TextInputEditText txtId = updateBookBinding.txtuName2;
-        TextInputEditText txtTitle = updateBookBinding.txtpassword2;
-        TextInputEditText txtDescription = updateBookBinding.txtfName2;
-        TextInputEditText txtAuthors = updateBookBinding.txtlName2;
-        TextInputEditText txtImage = updateBookBinding.txtMail2;
-        TextInputEditText txtPublicationYear = updateBookBinding.txtRole2;
-        TextInputEditText txtSoldBook = updateBookBinding.txtSDT2;
+            @Override
+            public void onClickItemBookEdit(Book book) {
 
-        txtId.setText(book.id);
-        txtTitle.setText(book.getTitle());
-        txtDescription.setText(book.getDescription());
-        txtAuthors.setText(book.getAuthors());
-        txtImage.setText(book.getImage());
-        txtPublicationYear.setText(book.getPublicationYear());
-        txtSoldBook.setText(book.getSoldBook());
+            }
 
-        View updateUserView = updateBookBinding.getRoot();
-        binding.countainerFrameLayout.removeAllViews();
-        binding.countainerFrameLayout.addView(updateUserView);
+            @Override
+            public void onClickItemBook(Category cate) {
+                showUpdateCate(cate);
+            }
 
-        updateBookBinding.btnUpdate.setOnClickListener(v -> {
-            book.setTitle(txtTitle.getText().toString());
-            book.setDescription(txtDescription.getText().toString());
-            book.setAuthors(txtAuthors.getText().toString());
-            book.setImage(txtImage.getText().toString());
-            book.setPublicationYear(Integer.parseInt(txtPublicationYear.getText().toString()));
-            book.setSoldBook(Integer.parseInt(txtSoldBook.getText().toString()));
+            @Override
+            public void onPositiveClick(String title, String description) {
 
-            AppDatabase db = AppDatabase.getInstance(getActivity());
-            Executor executor = Executors.newSingleThreadExecutor();
-            executor.execute(new Runnable() {
-                @Override
-                public void run() {
-                    db.runInTransaction(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                db.bookDao().update(book);
-                                Log.d("UpdateUser", "User updated successfully");
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(requireContext(), "User updated successfully", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNegativeClick() {
+
+            }
+        });
+        rcv.setAdapter(producAdapter);
+    }
+    public void showUpdateCate(Category cate){
+
+        itemProductBinding = ItemProductBinding.inflate(getLayoutInflater());
+        TextView txtName = itemProductBinding.txtCatName;
+
+        txtName.setText(cate.getName().toString());
+
+            View successView = LayoutInflater.from(adminActivity).inflate(R.layout.update_category, null);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this.adminActivity);
+            builder.setView(successView);
+
+            TextInputEditText txtNameCate ;
+            TextInputEditText txtDesCate ;
+
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
+            txtNameCate=alertDialog.findViewById(R.id.cateroryEditText);
+            txtDesCate=alertDialog.findViewById(R.id.desCateEditText);
+
+            txtNameCate.setText(cate.getName().toString());
+            txtDesCate.setText(cate.getDescription().toString());
+
+            Button btnUpdate = alertDialog.findViewById(R.id.btnUpdateCate);
+            Button btnClose = alertDialog.findViewById(R.id.btnCloseCate);
+            Button btnDel = alertDialog.findViewById(R.id.btnDelCate);
+            btnUpdate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                AppDatabase db = AppDatabase.getInstance(getActivity());
+                Executor executor = Executors.newSingleThreadExecutor();
+                executor.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        db.runInTransaction(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    cate.setName(txtNameCate.getText().toString());
+                                    cate.setDescription(txtDesCate.getText().toString());
+                                    db.categoryDao().update(cate);
+                                    Log.d("UpdateCaterory", "Caterory updated successfully");
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(requireContext(), "Category updated successfully", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                    adminActivity.replaceFragment(new AdminProductManagement());
+                                    alertDialog.cancel();
+
+                                } catch (Exception ex) {
+                                    Log.e("UpdateCaterory", "Error updating caterory: " + ex.getMessage());
                                     }
-                                });
-                            } catch (Exception ex) {
-                                Log.e("UpdateUser", "Error updating user: " + ex.getMessage());
-                            }
+                                }
+                            });
                         }
                     });
                 }
             });
-        });
-    }
+            btnClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertDialog.cancel();
+                }
+            });
+            btnDel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AppDatabase db = AppDatabase.getInstance(getActivity());
+                    Executor executor = Executors.newSingleThreadExecutor();
+                    executor.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            db.runInTransaction(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
 
-    private void showDeleteUserContent(){
+                                        List<Book> delBook = db.bookDao().findByCategoryId(cate.getId());
+                                        for (Book b: delBook
+                                             ) {
+                                            b.setCategoryId(0);
+                                            //db.bookDao().updateCategoryToNull(b.id);
+                                            db.bookDao().update(b);
+                                        }
+                                        db.categoryDao().delete(cate);
 
+                                        Log.d("UpdateCaterory", "Caterory deteted successfully");
+                                        getActivity().runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(requireContext(), "Category deteted successfully", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                        adminActivity.replaceFragment(new AdminProductManagement());
+                                        alertDialog.cancel();
+
+                                    } catch (Exception ex) {
+                                        Log.e("UpdateCaterory", "Error deleting caterory: " + ex.getMessage());
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            });
     }
-    private void showAddUserContent() {
-        addUserBinding = AddUserBinding.inflate(getLayoutInflater());
+    private void showAddCateContent() {
+        addCategoryBinding = AddCategoryBinding.inflate(getLayoutInflater());
         // Get the root view of the inflated layout
-        View addUserView = addUserBinding.getRoot();
+        View addCateView = addCategoryBinding.getRoot();
         binding.countainerFrameLayout.removeAllViews();
         // Add the inflated layout to a container in the fragment's layout``
-        binding.countainerFrameLayout.addView(addUserView);
+        binding.countainerFrameLayout.addView(addCateView);
 
-        addUserBinding.btnSave.setOnClickListener(v -> {
-            btnsaveAddUserClick();
-            adminActivity.replaceFragment(new AdminUserManagementFrag());
+        addCategoryBinding.btnAddCate.setOnClickListener(v -> {
+            btnsaveAddProductClick();
+            adminActivity.replaceFragment(new AdminProductManagement());
         });
     }
 
+    private void btnsaveAddProductClick() {
+        String title = addCategoryBinding.cateroryAddEditText.getText().toString();
+        String decription = addCategoryBinding.desAddCateEditText.getText().toString();
 
+        AppDatabase db = AppDatabase.getInstance(requireContext());
+        Executor executor = Executors.newSingleThreadExecutor();
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
 
-    private void btnsaveAddUserClick() {
-        String uName = addUserBinding.txtuName.getText().toString();
-        String pw = addUserBinding.txtpassword.getText().toString();
-        String role = addUserBinding.txtRole.getText().toString();
-        String fName = addUserBinding.txtfName.getText().toString();
-        String lName = addUserBinding.txtfName.getText().toString();
-        String mail = addUserBinding.txtMail.getText().toString();
-        String sdt = addUserBinding.txtSDT.getText().toString();
-        Boolean active = true;
-        if (uName.isEmpty() || pw.isEmpty()) {
-            Toast.makeText(requireContext(), "Please fill out the fields", Toast.LENGTH_SHORT).show();
-        } else {
-            AppDatabase db = AppDatabase.getInstance(requireContext());
-            Executor executor = Executors.newSingleThreadExecutor();
-            executor.execute(new Runnable() {
-                @Override
-                public void run() {
+                db.runInTransaction(new Runnable() {
+                    @Override
+                    public void run() {
+                        Category cate = new Category(title,decription);
 
-                    db.runInTransaction(new Runnable() {
-                        @Override
-                        public void run() {
-                            User user = new User(uName, pw, fName, lName, mail, sdt, active, role);
-
-                            try {
-                                db.userDao().insert(user);
-                            }
-                            catch (Exception ex){
-
-                            }
+                        try {
+                            db.categoryDao().insert(cate);
                         }
-                    });
-                }
-            });
-        }
+                        catch (Exception ex){
+
+                        }
+                    }
+                });
+            }
+        });
     }
 
-    //swipe to delete item SimpleCallback(Drag=0 - false, Swipe dir - left)
-    ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-            return false;
-        }
-
-        @Override
-        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            Snackbar snackbar = Snackbar.make(binding.countainerFrameLayout, "Item deleted successfully", Snackbar.LENGTH_LONG);
-            snackbar.show();
-
-            int position = viewHolder.getAdapterPosition();
-            Book bookDeleted = bookList.get(position);
-
-            bookList.remove(viewHolder.getAdapterPosition());
-            bookAdapter.notifyDataSetChanged();
-
-            AppDatabase db = AppDatabase.getInstance(getActivity());
-            Executor executor = Executors.newSingleThreadExecutor();
-            executor.execute(new Runnable() {
-                @Override
-                public void run() {
-                    db.runInTransaction(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                db.bookDao().delete(bookDeleted);
-                                Log.d("UpdateUser", "User delete successfully");
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-
-                                    }
-                                });
-                            } catch (Exception ex) {
-                                Log.e("UpdateUser", "Error deleting user: " + ex.getMessage());
-                            }
-                        }
-                    });
-                }
-            });
-        }
-    };
 }

@@ -11,11 +11,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/constraintUserView"
+        android:id="@+id/constraintBookAdminView"
         >
 
         <Button
-            android:id="@+id/btnAddCat"
+            android:id="@+id/btnAddBookAdmin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add caterory"
@@ -23,10 +23,10 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/catRecyclerView"
+            android:id="@+id/bookAdminRecyclerView"
             android:layout_width="409dp"
             android:layout_height="544dp"
-            app:layout_constraintTop_toBottomOf="@id/btnAddCat" />
+            app:layout_constraintTop_toBottomOf="@id/btnAddBookAdmin" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

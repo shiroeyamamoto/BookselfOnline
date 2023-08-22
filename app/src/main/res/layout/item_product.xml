@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
-    android:id="@+id/item_user_layout"
+    android:id="@+id/item_product_layout"
     >
 
     <androidx.cardview.widget.CardView
@@ -14,7 +14,7 @@
         android:elevation="4dp"
         app:cardCornerRadius="8dp"
         app:cardUseCompatPadding="true"
-        android:id="@+id/userCardView"
+        android:id="@+id/productCardView"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,31 +22,22 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/txtName"
+                android:id="@+id/txtCatName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="Nguyen Van A"
-                app:layout_constraintStart_toEndOf="@id/imgUser" />
-
-            <ImageView
-                android:id="@+id/imgUser"
-                android:layout_width="64dp"
-                android:layout_height="74dp"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <TextView
-                android:id="@+id/txtUserRole"
+                tools:layout_editor_absoluteX="5dp"
+                tools:layout_editor_absoluteY="0dp" />
+            <Button
+                android:id="@+id/btnEditProd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="Admin"
-                app:layout_constraintStart_toEndOf="@id/imgUser"
-                app:layout_constraintTop_toBottomOf="@id/txtName"
-
-                />
+                android:text="Edit"
+                android:background="@color/seed"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></Button>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

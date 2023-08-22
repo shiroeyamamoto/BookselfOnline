@@ -26,4 +26,7 @@ public interface CategoryDAO {
 
     @Delete
     void delete(Category... cates);
+
+    @Query("SELECT * FROM category WHERE name <> 'Empty'")
+    List<Category> selectAllExceptEmpty();
 }
