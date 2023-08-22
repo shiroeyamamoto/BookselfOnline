@@ -3,175 +3,173 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-   >
+    android:layout_height="match_parent">
 
     <com.google.android.material.carousel.MaskableFrameLayout
         android:id="@+id/maskableFrameLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imgView"
-            android:layout_width="405dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="4dp"
-
-            android:clickable="false"
-            android:focusable="false"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-
     </com.google.android.material.carousel.MaskableFrameLayout>
 
+    <!-- Back Button -->
     <com.google.android.material.button.MaterialButton
-
         android:id="@+id/mbtnBack"
         style="@style/Widget.Material3.Button.IconButton.Filled"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-
         app:icon="@drawable/sharp_arrow_back_24"
         app:iconTint="@android:color/white"
         app:layout_constraintStart_toStartOf="@+id/imgView"
         app:layout_constraintTop_toTopOf="@+id/imgView" />
 
+    <!-- Content Layout -->
     <LinearLayout
-
         android:id="@+id/linearLayout"
-        android:layout_width="407dp"
-        android:layout_height="471dp"
-        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/maskableFrameLayout">
 
-        app:layout_constraintVertical_bias="0.974">
-
+        <!-- Welcome Text -->
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
             android:gravity="center"
             android:text="@string/welcome_back"
-            android:textSize="34sp" />
+            android:textSize="34sp"
+            app:layout_constraintBottom_toTopOf="@id/descriptionText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- Description Text -->
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/descriptionText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0.54"
             android:fontFamily="@font/roboto"
             android:gravity="center"
             android:text="@string/login_to_your_account"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-
-            android:orientation="vertical">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textLayout1"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:gravity="center"
-                android:hint="Account name"
-                app:counterEnabled="true"
-                app:counterMaxLength="20"
-                app:endIconMode="clear_text"
-                app:helperText="Required *"
-
-
-                app:startIconDrawable="@drawable/baseline_account_circle_24">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtInAcc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textLayoutPassworld"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:gravity="center"
-                android:hint="Password"
-                app:counterEnabled="true"
-                app:counterMaxLength="20"
-                app:endIconDrawable="@drawable/baseline_visibility_off_24"
-                app:endIconMode="password_toggle"
-                app:errorEnabled="true"
-                app:errorIconDrawable="@drawable/baseline_error_outline_24"
-                app:helperText="Required *"
-
-
-                app:startIconDrawable="@drawable/baseline_lock_24"
-
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtInPas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.button.MaterialButton
-
-                android:id="@+id/btnLogin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-
-                android:elevation="8dp"
-                android:gravity="center"
-                android:text="Login"
-                app:cornerRadius="50dp" />
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="20dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="120dp">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="24dp">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
+                <!-- TextInputLayout for Account Name -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textLayout1"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Dont ave account! Click ==> " />
+                    android:layout_marginTop="16dp"
+                    android:hint="Account name"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20"
+                    app:endIconMode="clear_text"
+                    app:helperText="Required *"
+                    app:startIconDrawable="@drawable/baseline_account_circle_24">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtInAcc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- TextInputLayout for Password -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textLayoutPassworld"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Password"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20"
+                    app:endIconDrawable="@drawable/baseline_visibility_off_24"
+                    app:endIconMode="password_toggle"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/baseline_error_outline_24"
+                    app:helperText="Required *"
+                    app:startIconDrawable="@drawable/baseline_lock_24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtInPas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Login Button -->
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSignup"
-                    style="@style/Widget.Material3.Button.TextButton.Dialog.Flush"
+                    android:id="@+id/btnLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Login"
+                    app:cornerRadius="50dp"
+                    app:elevation="8dp" />
+
+                <!-- Sign Up Text and Button -->
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SIGN UP" />
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Don't have an account? Click ==> "
+                        android:textSize="14sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSignup"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SIGN UP"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <!-- Chi tiết về cuốn sách -->
     <ImageView
         android:id="@+id/bookImage"
         android:layout_width="match_parent"
@@ -36,6 +35,5 @@
         android:text="Book Description"
         android:textSize="14sp" />
 
-    <!-- Các chi tiết khác về cuốn sách có thể được thêm vào ở đây -->
 
 </LinearLayout>

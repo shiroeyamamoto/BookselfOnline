@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 import androidx.room.Delete;
 
@@ -28,6 +29,13 @@ public interface OrderDetailDAO {
 
     @Query("SELECT * FROM order_detail WHERE id = :orderDetailId")
     OrderDetail getOrderDetailById(int orderDetailId);
+
+    @Query("SELECT * FROM order_detail WHERE sale_order_id = :sale_order_id")
+    List<OrderDetail> getAllOrderDetailBySaleOrderId(int sale_order_id);
+
+    @Transaction
+    @Query("SELECT * FROM order_detail WHERE sale_order_id = :saleOrderId AND book_id = :bookId")
+    OrderDetail getOrderDetailBySaleOrderIdAndBookId(int saleOrderId, int bookId);
 
 
 }

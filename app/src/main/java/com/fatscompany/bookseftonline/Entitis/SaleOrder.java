@@ -20,11 +20,21 @@ public class SaleOrder {
 
     @ColumnInfo(name = "user_id")
     private int userId;
+    @ColumnInfo(name = "name")
+    private String name;
 
+    public String getName() {
+        return name;
+    }
 
-    public SaleOrder(Date createdDate, int userId) {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public SaleOrder(Date createdDate, int userId, String name) {
         this.createdDate = createdDate;
         this.userId = userId;
+        this.name = name;
     }
 
     public Date getCreatedDate() {
