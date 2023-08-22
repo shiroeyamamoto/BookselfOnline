@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
-<<<<<<< HEAD
         binding.navbottom.setOnItemSelectedListener(item -> {
 
             if (item.getItemId() == R.id.home) {
@@ -61,10 +60,8 @@ public class MainActivity extends AppCompatActivity {
             return true;
 
         });
-=======
         replaceViewPager(0);
 
->>>>>>> 7b4881256bb4012891457da934ac69070437b02f
     }
 
 
