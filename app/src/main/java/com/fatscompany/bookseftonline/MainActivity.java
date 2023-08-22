@@ -47,8 +47,24 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
+<<<<<<< HEAD
+        binding.navbottom.setOnItemSelectedListener(item -> {
+
+            if (item.getItemId() == R.id.home) {
+                binding.viewPager2.setCurrentItem(0);
+            } else if (item.getItemId() == R.id.favorite) {
+                binding.viewPager2.setCurrentItem(1);
+            } else {
+                binding.viewPager2.setCurrentItem(2);
+            }
+
+            return true;
+
+        });
+=======
         replaceViewPager(0);
 
+>>>>>>> 7b4881256bb4012891457da934ac69070437b02f
     }
 
 

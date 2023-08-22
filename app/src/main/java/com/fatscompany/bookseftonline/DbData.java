@@ -262,6 +262,7 @@ public class DbData extends AppCompatActivity {
         CategoryDAO cateDao = database.categoryDao();
         List<Category> categories = new ArrayList<>();
 
+        categories.add(new Category("Empty", "Empty"));
         categories.add(new Category("Science Fiction & Fantasy", "Books about science and technology"));
         categories.add(new Category("Literature", "Books about literature and novels"));
         categories.add(new Category("History", "Books about history and politics"));

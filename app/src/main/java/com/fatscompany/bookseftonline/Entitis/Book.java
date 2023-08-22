@@ -1,5 +1,6 @@
 package com.fatscompany.bookseftonline.Entitis;
 
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -8,8 +9,8 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "book",
         foreignKeys = {
-                @ForeignKey(entity = Category.class, parentColumns = "id", childColumns = "category_id", onDelete = ForeignKey.NO_ACTION, onUpdate = ForeignKey.NO_ACTION),
-                @ForeignKey(entity = Publishers.class, parentColumns = "id", childColumns = "publisher_id", onDelete = ForeignKey.NO_ACTION, onUpdate = ForeignKey.NO_ACTION)
+                @ForeignKey(entity = Category.class, parentColumns = "id", childColumns = "category_id", onDelete = ForeignKey.SET_NULL, onUpdate = ForeignKey.NO_ACTION),
+                @ForeignKey(entity = Publishers.class, parentColumns = "id", childColumns = "publisher_id", onDelete = ForeignKey.SET_NULL, onUpdate = ForeignKey.NO_ACTION)
         })
 public class Book {
     @PrimaryKey(autoGenerate = true)
