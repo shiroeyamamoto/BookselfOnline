@@ -16,10 +16,11 @@ public interface UserDAO {
     List<User> selectAll();
 
     @Query("SELECT * FROM User WHERE id=:id")
-    User findById(String id);
+    User findUserById(int id);
 
     @Query("SELECT * FROM USER WHERE username=:username AND password = :password")
     User checkUser(String username, String password);
+
     @Insert
     void insert(User... users);
 
@@ -28,4 +29,10 @@ public interface UserDAO {
 
     @Delete
     void delete(User... users);
+
+    @Query("SELECT * FROM User WHERE username=:username")
+    User findUserByUsername(String username);
+
+    @Query("SELECT * FROM User WHERE email=:email")
+    User findUserByEmail(String email);
 }

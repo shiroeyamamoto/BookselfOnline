@@ -1,5 +1,6 @@
 package com.fatscompany.bookseftonline.FragmentCode;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,11 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.fatscompany.bookseftonline.AppDatabase;
 import com.fatscompany.bookseftonline.Entitis.Book;
 import com.fatscompany.bookseftonline.Entitis.Category;
 import com.fatscompany.bookseftonline.R;
+import com.fatscompany.bookseftonline.SeeAllActivity;
+import com.fatscompany.bookseftonline.UserSessionManager;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.List;
@@ -64,7 +68,7 @@ public class FragmentMainHome extends Fragment {
                 database.runInTransaction(new Runnable() {
                     @Override
                     public void run() {
-                        myLBook = database.bookDao().getAllBook();
+                        myLBook = database.bookDao().getAnyTenBooks();
                         cates = database.categoryDao().selectAll();
                         bestSellerBook = database.bookDao().getTopSoldBooks();
                         if (myLBook != null || cates != null || bestSellerBook != null) {
@@ -91,9 +95,11 @@ public class FragmentMainHome extends Fragment {
         btnSeeAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openBottomSheet();
+                Intent intent = new Intent(getActivity(), SeeAllActivity.class);
+                startActivity(intent);
             }
         });
+
         return view;
     }
 

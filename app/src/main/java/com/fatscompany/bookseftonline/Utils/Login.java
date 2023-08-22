@@ -9,13 +9,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.fatscompany.bookseftonline.AppDatabase;
 import com.fatscompany.bookseftonline.Database.DatabaseController;
 import com.fatscompany.bookseftonline.Entitis.User;
+import com.fatscompany.bookseftonline.MainActivity;
 import com.fatscompany.bookseftonline.R;
+import com.fatscompany.bookseftonline.UserSessionManager;
 import com.fatscompany.bookseftonline.databinding.ActivityLoginAppBinding;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -31,6 +34,7 @@ public class Login extends AppCompatActivity {
 
     private ActivityLoginAppBinding binding;
     private DatabaseController db;
+    private Button btnWrong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +42,9 @@ public class Login extends AppCompatActivity {
         binding = ActivityLoginAppBinding.inflate(getLayoutInflater());
         View v = binding.getRoot();
         setContentView(v);
-
+        User userSave;
+        binding.txtInAcc.setText("user1");
+        binding.txtInPas.setText("pass1");
         Glide.with(this).load(R.drawable.logo).into(binding.imgView);
         AppDatabase db = AppDatabase.getInstance(Login.this);
         binding.mbtnBack.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +62,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (binding.txtInAcc.length() >= 20) {
-                    binding.textLayout1.setError("Nhập ít thôi thằng nguu");
+                    binding.textLayout1.setError("Qua Dai");
                 } else if (binding.txtInAcc.length() < 20) {
                     binding.textLayout1.setError(null);
                 }
@@ -82,10 +88,44 @@ public class Login extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                Button btnOK = null;
                                 if (userCheck != null) {
-                                    Toast.makeText(Login.this, "hay lam dmm", Toast.LENGTH_SHORT).show();
+                                    UserSessionManager sessionManager = new UserSessionManager(Login.this);
+                                    sessionManager.saveUserDetails(userCheck);
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
+                                    builder.setView(R.layout.dialog_login_success);
+
+                                    AlertDialog alertDialog = builder.create();
+                                    alertDialog.show();
+
+                                    // Xử lý nút OK trong dialog
+                                    btnOK = alertDialog.findViewById(R.id.btnOK);
+                                    if (btnOK != null) {
+                                        btnOK.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                Intent i = new Intent(Login.this, MainActivity.class);
+
+                                                startActivity(i);
+
+                                            }
+                                        });
+                                    }
                                 } else {
-                                    Toast.makeText(Login.this, "Nhập nguu cái đmmm", Toast.LENGTH_SHORT).show();
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
+                                    builder.setView(R.layout.dialog_login_wrong);
+
+                                    AlertDialog alertDialog = builder.create();
+                                    alertDialog.show();
+                                    btnWrong = alertDialog.findViewById(R.id.btnWrong);
+                                    if (btnWrong != null) {
+                                        btnWrong.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                alertDialog.dismiss();
+                                            }
+                                        });
+                                    }
                                 }
                             }
                         });

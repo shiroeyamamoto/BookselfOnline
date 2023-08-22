@@ -1,6 +1,7 @@
 
 package com.fatscompany.bookseftonline;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
@@ -31,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(view);
         setSupportActionBar(binding.toolbar);
-        replaceViewPager(0);
 
         binding.toolbar.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
@@ -40,22 +40,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             }
+            if (item.getItemId() == R.id.action_cart) {
+                Intent intent = new Intent(MainActivity.this, CartLayout.class);
+                startActivity(intent);
+            }
             return false;
         });
 
-        binding.navbottom.setOnItemSelectedListener(item -> {
-
-            if (item.getItemId() == R.id.home) {
-                binding.viewPager2.setCurrentItem(0);
-            } else if (item.getItemId() == R.id.favorite) {
-                binding.viewPager2.setCurrentItem(1);
-            } else {
-                binding.viewPager2.setCurrentItem(2);
-            }
-
-            return true;
-
-        });
+        replaceViewPager(0);
 
     }
 
@@ -117,7 +109,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        db.close();
+
+        UserSessionManager sessionManager = new UserSessionManager(this);
+        sessionManager.clearUserDetails();
     }
 
 }
