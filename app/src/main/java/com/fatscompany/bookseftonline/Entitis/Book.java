@@ -59,6 +59,10 @@ public class Book {
         this.currentQuantity = 1;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getTitle() {
         return title;
     }

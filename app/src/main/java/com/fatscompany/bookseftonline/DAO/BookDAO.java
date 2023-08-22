@@ -24,6 +24,9 @@ public interface BookDAO {
     @Insert
     void insert(Book... books);
 
+    @Query("SELECT * FROM Book LIMIT 10")
+    List<Book> getAnyTenBooks();
+
     @Update
     void update(Book... books);
 
@@ -32,6 +35,9 @@ public interface BookDAO {
 
     @Query("SELECT * FROM Book where title = :title")
     Book checkBookExist(String title);
+
+    @Query("SELECT * FROM Book where id = :id")
+    Book findBookByID(int id);
 
     @Query("SELECT * FROM book WHERE category_id IN (SELECT id FROM category WHERE name = :categoryName)")
     List<Book> getBooksInCategory(String categoryName);

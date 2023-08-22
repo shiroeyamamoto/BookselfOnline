@@ -21,7 +21,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
             case 1:
                 return new MainFavorite();
             case 2:
-                return new MainMore();
+                return new FragmentMainMore();
             case 3:
                 return new SearchFragment();
             default:

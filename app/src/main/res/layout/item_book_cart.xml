@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/imgOrderedBook"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="120dp"
+            android:layout_height="163dp"
             android:contentDescription="Book Image"
             android:src="@drawable/ic_launcher_background" />
 
@@ -28,21 +28,21 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtOrderedTitle"
+                android:id="@+id/txtOrderedBookTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Book Title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
             <TextView
-                android:id="@+id/txtOrderedAuthor"
+                android:id="@+id/txtOrderedAuthorBook"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Book Author"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
             <TextView
-                android:id="@+id/txtOrderedPrice"
+                android:id="@+id/txtOrderedBookPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Price: $XX.XX"
@@ -52,6 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageButton
@@ -78,6 +79,13 @@
                     android:contentDescription="Increase Quantity"
                     android:src="@drawable/baseline_arrow_circle_right_24" />
             </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/checkBuy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Buy" />
 
             <Button
                 android:id="@+id/btnRemove"

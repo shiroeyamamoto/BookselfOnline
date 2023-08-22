@@ -251,8 +251,12 @@ public class DbData extends AppCompatActivity {
         //USER
         User user1 = new User("user1", "pass1", "First 1", "Last 1", "email1@example.com", "123456789", false, "role1");
         User user2 = new User("user2", "pass2", "First 2", "Last 2", "email2@example.com", "987654321", false, "role2");
+        User user3 = new User("1", "1", "First 2", "Last 2", "email2@example.com", "987654321", false, "role2");
+        User user4 = new User("USERTEST", "2", "First 2", "Last 2", "email2@example.com", "987654321", false, "CUSTOMER");
+        User user5 = new User("admin", "1", "First 2", "Last 2", "email2@example.com", "987654321", false, "ADMIN");
+
         UserDAO userDao = database.userDao();
-        userDao.insert(user1, user2);
+        userDao.insert(user1, user2, user3, user4,user5);
 
 
         CategoryDAO cateDao = database.categoryDao();

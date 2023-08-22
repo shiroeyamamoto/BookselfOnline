@@ -3,10 +3,9 @@
 
 
     <item
-        android:id="@+id/action_search"
-        android:icon="@drawable/baseline_search_24"
-        android:title="Search"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        android:id="@+id/btnBackMenu"
+        android:icon="@drawable/baseline_arrow_circle_left_24"
+        android:title="back"
         app:showAsAction="always" />
 
     <item

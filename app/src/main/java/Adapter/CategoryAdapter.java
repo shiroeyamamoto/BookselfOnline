@@ -1,17 +1,23 @@
 package Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fatscompany.bookseftonline.CategoryBookResult;
 import com.fatscompany.bookseftonline.Entitis.Book;
 import com.fatscompany.bookseftonline.Entitis.Category;
+import com.fatscompany.bookseftonline.MainActivity;
 import com.fatscompany.bookseftonline.R;
+import com.fatscompany.bookseftonline.SearchActivity;
 
 import java.util.List;
 
@@ -41,6 +47,22 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CateHo
         if (myCate == null)
             return;
         holder.btnCate.setText(myCate.getName());
+        holder.btnCate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(holder.itemView.getContext(), CategoryBookResult.class);
+                /// tạo bundel để chứa dữ liệu
+                Bundle myBundle = new Bundle();
+                /// thêm dữ kiệu vào bundel
+                myBundle.putString("stringCate", holder.btnCate.getText().toString());
+
+                /// đữa bundel vào intent
+                i.putExtra("bundalCateLayout", myBundle);
+                holder.itemView.getContext().startActivity(i);
+
+
+            }
+        });
     }
 
     @Override
@@ -52,10 +74,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CateHo
 
     class CateHolderView extends RecyclerView.ViewHolder {
         private Button btnCate;
+        private ConstraintLayout layoutbtnCate;
 
         public CateHolderView(@NonNull View itemView) {
             super(itemView);
             btnCate = itemView.findViewById(R.id.btnCate);
+            layoutbtnCate = itemView.findViewById(R.id.layoutbtnCate);
         }
 
     }
