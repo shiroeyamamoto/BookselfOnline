@@ -3,21 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/userStatisticLayout"
+    >
 
 
     <TextView
-        android:id="@+id/txtUserName"
+        android:id="@+id/txtFullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
         app:layout_constraintBottom_toTopOf="parent" />
+    <TextView
+        android:id="@+id/txtTotalOrders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@id/txtFullName" />
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chartUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/txtUserName">
+        app:layout_constraintBottom_toBottomOf="@id/txtTotalOrders">
 
     </com.github.mikephil.charting.charts.LineChart>
 
