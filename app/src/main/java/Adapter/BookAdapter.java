@@ -20,12 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.fatscompany.bookseftonline.AppDatabase;
 import com.fatscompany.bookseftonline.Entitis.Book;
-<<<<<<< HEAD
 import com.fatscompany.bookseftonline.Entitis.User;
-=======
 import com.fatscompany.bookseftonline.Entitis.OrderDetail;
 import com.fatscompany.bookseftonline.Entitis.SaleOrder;
->>>>>>> 7b4881256bb4012891457da934ac69070437b02f
 import com.fatscompany.bookseftonline.R;
 import com.fatscompany.bookseftonline.UserSessionManager;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
