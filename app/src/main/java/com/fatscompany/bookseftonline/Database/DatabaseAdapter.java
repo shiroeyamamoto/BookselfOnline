@@ -12,7 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
+import com.fatscompany.bookseftonline.Entitis.UserData;
+
 import java.sql.Time;
+import java.util.List;
 
 public class DatabaseAdapter extends BaseAdapter {
     private DatabaseController dbHelper;
@@ -64,9 +67,11 @@ public class DatabaseAdapter extends BaseAdapter {
         dbHelper.InsertOrderDetail(name, bookId, saleOrderId,amount);
     }
 
-    public void displayUser(){
-
+    public List<UserData> getUserData(){
+        List<UserData> userDataList = dbHelper.getUserData();
+        return userDataList;
     }
+
 
 
     @Override

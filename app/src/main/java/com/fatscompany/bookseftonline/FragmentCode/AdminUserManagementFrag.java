@@ -61,6 +61,7 @@ public class AdminUserManagementFrag extends Fragment {
         binding = FragmentAdminUserManagementBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
+
         binding.btnCreateUser.setOnClickListener(v -> {
             showAddUserContent();
         });
@@ -101,6 +102,9 @@ public class AdminUserManagementFrag extends Fragment {
 
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(rcv);
+
+
+
         return view;
     }
 

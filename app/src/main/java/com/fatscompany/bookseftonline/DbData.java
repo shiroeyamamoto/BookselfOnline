@@ -297,20 +297,25 @@ public class DbData extends AppCompatActivity {
         }
         ;
 
-//        InventoryDAO ivo = database.inventoryDao();
+      /*  InventoryDAO ivo = database.inventoryDao();
+       ivo.insertInventory(new Inventory(10, 1));
+        ivo.insertInventory(new Inventory(23, 2));
+       ivo.insertInventory(new Inventory(33, 3));*/
+
+        //        InventoryDAO ivo = database.inventoryDao();
 //        ivo.insertInventory(new Inventory(10, 1));
 //        ivo.insertInventory(new Inventory(23, 2));
 //        ivo.insertInventory(new Inventory(33, 3));
 
-//        SaleOrderDAO sod = database.saleOrderDao();
-//        sod.insertSaleOrder(new SaleOrder(new Date(), 1));
-//        sod.insertSaleOrder(new SaleOrder(new Date(), 2));
-//        sod.insertSaleOrder(new SaleOrder(new Date(), 1));
+       SaleOrderDAO sod = database.saleOrderDao();
+       sod.insertSaleOrder(new SaleOrder(new Date(), 1, "2323" ));
+       sod.insertSaleOrder(new SaleOrder(new Date(), 2, "2323"));
+       sod.insertSaleOrder(new SaleOrder(new Date(), 1, "0909"));
 
-//        OrderDetailDAO ord = database.orderDetailDao();
-//        ord.insertOrderDetail(new OrderDetail("Order 1", 1, 1, 5));
-//        ord.insertOrderDetail(new OrderDetail("Order 2", 2, 1, 3));
-//        ord.insertOrderDetail(new OrderDetail("Order 3", 3, 2, 2));
+      OrderDetailDAO ord = database.orderDetailDao();
+       ord.insertOrderDetail(new OrderDetail("Order 1", 1, 1, 5));
+        ord.insertOrderDetail(new OrderDetail("Order 2", 2, 1, 3));
+       ord.insertOrderDetail(new OrderDetail("Order 3", 3, 2, 2));
     }
 
 }

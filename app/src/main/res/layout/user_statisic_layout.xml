@@ -2,30 +2,31 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:id="@+id/userStatisticLayout"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
 
     <TextView
         android:id="@+id/txtFullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="parent" />
+        android:text="asasd"
+
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/txtTotalOrders"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@id/txtFullName" />
+        android:text="asdasd"
+        app:layout_constraintTop_toBottomOf="@+id/txtFullName" />
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chartUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/txtTotalOrders">
+        app:layout_constraintTop_toBottomOf="@id/txtTotalOrders">
 
     </com.github.mikephil.charting.charts.LineChart>
 
