@@ -56,10 +56,11 @@ public class AdminUserManagementFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
 
         binding = FragmentAdminUserManagementBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
 
         binding.btnCreateUser.setOnClickListener(v -> {
             showAddUserContent();
@@ -101,6 +102,9 @@ public class AdminUserManagementFrag extends Fragment {
 
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(rcv);
+
+
+
         return view;
     }
 

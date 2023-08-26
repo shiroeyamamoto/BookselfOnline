@@ -2,7 +2,11 @@ package com.fatscompany.bookseftonline.Database;
 
 import static com.fatscompany.bookseftonline.Database.Settings.TABLE_NAME_01;
 import static com.fatscompany.bookseftonline.Database.Settings.TABLE_NAME_06;
+import static com.fatscompany.bookseftonline.Database.Settings.TABLE_NAME_05;
+import static com.fatscompany.bookseftonline.Database.Settings.TABLE_NAME_04;
 
+import com.fatscompany.bookseftonline.Entitis.User;
+import com.fatscompany.bookseftonline.Entitis.UserData;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -210,6 +214,41 @@ public class DatabaseController extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public List<UserData> getUserData(){
+        List<UserData> userDataList = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
 
+        String query = "SELECT user.first_name, user.last_name, sale_order.create_date, order_detail.mount " +
+                "FROM user " +
+                "JOIN sale_order ON user.id = sale_order.user_id " +
+                "JOIN order_detail ON sale_order.id = order_detail.order_id;";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                try{
+                    String fName = cursor.getString((cursor.getColumnIndex("first_name")));
+                    String lName = cursor.getString((cursor.getColumnIndex("last_name")));
+                    //String userName = fName + " " + lName;
+                    String createDate = cursor.getString(cursor.getColumnIndex("create_date"));
+                    int orderDetailMount = cursor.getInt(cursor.getColumnIndex("mount"));
+
+                    UserData userdData = new UserData(fName, lName, createDate, orderDetailMount);
+                    userDataList.add(userdData);
+
+                }catch(Exception ex){
+
+                }
+
+
+            } while (cursor.moveToNext());
+
+            cursor.close();
+        }
+        db.close();
+
+        return userDataList;
+    }
 
 }

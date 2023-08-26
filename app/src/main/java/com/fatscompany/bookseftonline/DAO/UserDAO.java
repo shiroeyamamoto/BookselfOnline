@@ -35,4 +35,5 @@ public interface UserDAO {
 
     @Query("SELECT * FROM User WHERE email=:email")
     User findUserByEmail(String email);
+
 }
