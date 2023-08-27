@@ -33,8 +33,8 @@ public class UserStatisticAdapter extends RecyclerView.Adapter<UserStatisticAdap
     Context context;
     List<OrderDetail> orderDetails;
     List<SaleOrder> saleOrdersList;
-
     int total = 0;
+
     AppDatabase db;
 
     public UserStatisticAdapter(Context context, List<User> userList) {
@@ -66,21 +66,27 @@ public class UserStatisticAdapter extends RecyclerView.Adapter<UserStatisticAdap
                     @Override
                     public void run() {
                         try {
+
                             saleOrdersList = db.saleOrderDao().getAllSaleOrderByUserId(user.getId());
                             for (SaleOrder saleOrder : saleOrdersList) {
                                 List<OrderDetail> orderDetails = db.orderDetailDao().getAllOrderDetailBySaleOrderId(saleOrder.getId());
                                 for (OrderDetail orderDetail : orderDetails) {
+                                    if (orderDetail.getAmount() == 0){
+                                        break;
+                                    }
                                     total += orderDetail.getAmount();
                                     Log.d("thanhcong", String.valueOf(total));
                                 }
+                                Log.d("thanhcong1", String.valueOf(total));
+                                holder.txtTotalOrders.setText("Orders: " + String.valueOf(total));
+                                total = 0;
                             }
-                            holder.itemView.post(new Runnable() {
+                            /*holder.itemView.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    holder.txtTotalOrders.setText(String.valueOf(total));
-                                }
-                            });
 
+                                }
+                            });*/
                         } catch (Exception ex) {
 
                         }
@@ -88,13 +94,9 @@ public class UserStatisticAdapter extends RecyclerView.Adapter<UserStatisticAdap
                 });
             }
         });
-
-
-        holder.txtTotalOrders.setText((String.valueOf(total)));
-        total =0;
+        //holder.txtTotalOrders.setText((String.valueOf(total)));
         holder.txtFullName.setText(user.getFirstName() + " " +user.getLastName());
-        holder.txtTotalOrders.setText((String.valueOf(total)));
-
+        //holder.txtTotalOrders.setText((String.valueOf(total)));
     }
 
     @Override

@@ -34,5 +34,4 @@ public interface SaleOrderDAO {
 
     @Query("SELECT * FROM sale_order where name= :name")
     SaleOrder getSaleOrder(String name);
-
 }
