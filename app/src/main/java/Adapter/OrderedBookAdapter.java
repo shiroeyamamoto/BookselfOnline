@@ -1,6 +1,7 @@
 package Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -23,6 +26,7 @@ import com.fatscompany.bookseftonline.R;
 import com.fatscompany.bookseftonline.Entitis.OrderDetail;
 import com.fatscompany.bookseftonline.UserSessionManager;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -33,7 +37,10 @@ public class OrderedBookAdapter extends RecyclerView.Adapter<OrderedBookAdapter.
     private List<OrderDetail> orderDetailList;
     AppDatabase database;
     UserSessionManager sessionManager;
-
+    public List<Integer> selectedOrderDetailIds = new ArrayList<>();
+    public List<Integer> getSelectedOrderDetailIds() {
+        return selectedOrderDetailIds;
+    }
     public OrderedBookAdapter(Context context, List<OrderDetail> orderDetailList) {
         this.context = context;
         this.orderDetailList = orderDetailList;
@@ -71,10 +78,19 @@ public class OrderedBookAdapter extends RecyclerView.Adapter<OrderedBookAdapter.
                                     .into(holder.imgOrderedBook);
                             holder.txtOrderedBookTitle.setText(book.getTitle());
                             holder.txtOrderedAuthorBook.setText(book.getAuthors());
+                            holder.txtOrderedBookPrice.setText(String.format("%.2f", book.getPrice()));
                             holder.edtQuantity.setText(String.valueOf(orderDetail.getAmount()));
                         }
                     });
                 }
+                holder.checkBuy.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    if (isChecked) {
+                        holder.addSelectedOrderDetailId(orderDetail.getId());
+                    } else {
+                        holder.removeSelectedOrderDetailId(orderDetail.getId());
+                    }
+                });
+
             }
         });
 
@@ -129,6 +145,7 @@ public class OrderedBookAdapter extends RecyclerView.Adapter<OrderedBookAdapter.
         });
 
 
+
     }
 
     @Override
@@ -143,6 +160,8 @@ public class OrderedBookAdapter extends RecyclerView.Adapter<OrderedBookAdapter.
         Button btnRemove;
         CheckBox checkBuy;
         ImageView imgOrderedBook;
+        Button btnPayment, btnPaymentHistory;
+        ConstraintLayout cartContainer;
 
         public OrderedBookViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -155,6 +174,18 @@ public class OrderedBookAdapter extends RecyclerView.Adapter<OrderedBookAdapter.
             edtQuantity = itemView.findViewById(R.id.edtQuantity);
             btnRemove = itemView.findViewById(R.id.btnRemove);
             checkBuy = itemView.findViewById(R.id.checkBuy);
+            cartContainer = itemView.findViewById(R.id.cartContainer);
+
+        }
+
+
+
+        public void addSelectedOrderDetailId(int orderDetailId) {
+            selectedOrderDetailIds.add(orderDetailId);
+        }
+
+        public void removeSelectedOrderDetailId(int orderDetailId) {
+            selectedOrderDetailIds.remove((Integer) orderDetailId);
         }
     }
 }

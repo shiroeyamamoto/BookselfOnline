@@ -14,11 +14,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.fatscompany.bookseftonline.AppDatabase;
 import com.fatscompany.bookseftonline.Entitis.Book;
+import com.fatscompany.bookseftonline.Entitis.User;
 import com.fatscompany.bookseftonline.Entitis.OrderDetail;
 import com.fatscompany.bookseftonline.Entitis.SaleOrder;
 import com.fatscompany.bookseftonline.R;
@@ -35,14 +37,12 @@ import java.util.concurrent.Executors;
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
     List<Book> myListBook;
     Context context;
-    public iClickItemUserListener itemOnClickListener;
+    public iClickItemBookListener itemOnClickListener;
 
     public BookAdapter(Context context, List<Book> myListBook) {
-
         this.context = context;
         this.myListBook = myListBook;
     }
-
     /// định nghĩa những view đã khai báo trong item
 
 
@@ -168,7 +168,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     }
 
 
-    public void setOnClick(iClickItemUserListener ic) {
+    public void setOnClick(iClickItemBookListener ic) {
         this.itemOnClickListener = ic;
     }
 
@@ -180,13 +180,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         private TextView txtAuthor;
         private CardView itemBookLayout;
 
+
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
             itemBookLayout = itemView.findViewById(R.id.itemBookLayout);
             imgVBook1 = itemView.findViewById(R.id.imgVBook);
             txtTitle = itemView.findViewById(R.id.txtTitle);
             txtAuthor = itemView.findViewById(R.id.txtAuthor);
-
         }
     }
 }

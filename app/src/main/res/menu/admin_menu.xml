@@ -9,8 +9,11 @@
             android:id="@+id/user_management"
             android:title="User management" />
         <item
-            android:id="@+id/product_management"
-            android:title="Product management" />
+            android:id="@+id/Category_management"
+            android:title="Category management" />
+        <item
+            android:id="@+id/Book_management"
+            android:title="Book management" />
     </group>
 
     <group android:checkableBehavior="single">

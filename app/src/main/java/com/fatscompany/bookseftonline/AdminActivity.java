@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.fatscompany.bookseftonline.FragmentCode.AdminBookManagement;
+import com.fatscompany.bookseftonline.FragmentCode.AdminProductManagement;
 import com.fatscompany.bookseftonline.FragmentCode.AdminStatisticFrag;
 import com.fatscompany.bookseftonline.FragmentCode.AdminUserManagementFrag;
 import com.fatscompany.bookseftonline.databinding.ActivityAdminBinding;
@@ -69,6 +71,12 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         }
         else if (itemID == R.id.user_management) {
             replaceFragment(new AdminUserManagementFrag());
+        }
+        else if (itemID == R.id.Category_management) {
+            replaceFragment(new AdminProductManagement());
+        }
+        else if (itemID == R.id.Book_management) {
+            replaceFragment(new AdminBookManagement());
         }
 
         binding.adminDrawerlayout.closeDrawer(GravityCompat.START);
