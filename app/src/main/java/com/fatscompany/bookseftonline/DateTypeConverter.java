@@ -11,7 +11,6 @@ public class DateTypeConverter {
     public static Date toDate(Long timestamp) {
         return timestamp == null ? null : new Date(timestamp);
     }
-
     @TypeConverter
     public static Long toTimestamp(Date date) {
         return date == null ? null : date.getTime();
@@ -24,5 +23,4 @@ public class DateTypeConverter {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         return sdf.format(date);
     }
-
 }
