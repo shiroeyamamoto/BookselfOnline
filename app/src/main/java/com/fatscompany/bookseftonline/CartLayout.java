@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -69,6 +70,8 @@ public class CartLayout extends AppCompatActivity {
                     public void run() {
                         orderedBookAdapter = new OrderedBookAdapter(CartLayout.this, orderDetailList);
                         rcvCart.setAdapter(orderedBookAdapter);
+
+
                     }
                 });
             }
@@ -98,13 +101,25 @@ public class CartLayout extends AppCompatActivity {
                             }
 
                         }
+                        CartLayout.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                            rcvCart.getAdapter().notifyDataSetChanged();
+                            }
+                        });
                     }
                 });
 
             }
         });
-
-
+        binding.btnPaymentHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(CartLayout.this, PaymentLayout.class);
+                startActivity(i);
+            }
+        });
     }
 
 
