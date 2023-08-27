@@ -4,30 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/userStatisticLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginRight="10dp"
+    >
 
 
     <TextView
         android:id="@+id/txtFullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="asasd"
 
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:text="asasd"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtTotalOrders"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="asdasd"
+        android:text="Orders: 0"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
         app:layout_constraintTop_toBottomOf="@+id/txtFullName" />
-
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/chartUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/txtTotalOrders">
-
-    </com.github.mikephil.charting.charts.LineChart>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

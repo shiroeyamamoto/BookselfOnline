@@ -37,5 +37,6 @@ public interface OrderDetailDAO {
     @Query("SELECT * FROM order_detail WHERE sale_order_id = :saleOrderId AND book_id = :bookId")
     OrderDetail getOrderDetailBySaleOrderIdAndBookId(int saleOrderId, int bookId);
 
-
+    @Query("SELECT amount AS total_amount FROM order_detail WHERE book_id = :book_id")
+    int getTotalSoldAmountByBookId(int book_id);
 }

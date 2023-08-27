@@ -11,10 +11,12 @@ public class DateTypeConverter {
     public static Date toDate(Long timestamp) {
         return timestamp == null ? null : new Date(timestamp);
     }
+
     @TypeConverter
     public static Long toTimestamp(Date date) {
         return date == null ? null : date.getTime();
     }
+
     @TypeConverter
     public static String fromDate(Date date) {
         if (date == null) {
