@@ -16,6 +16,10 @@
         android:supportsRtl="true"
         tools:targetApi="31">
         <activity
+            android:name=".PaymentLayout"
+            android:theme="@style/AppTheme"
+            android:exported="true" />
+        <activity
             android:name=".SeeAllActivity"
             android:exported="true"
             android:theme="@style/AppTheme" />

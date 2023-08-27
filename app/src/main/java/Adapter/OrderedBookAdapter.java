@@ -1,5 +1,6 @@
 package Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,9 +39,11 @@ public class OrderedBookAdapter extends RecyclerView.Adapter<OrderedBookAdapter.
     AppDatabase database;
     UserSessionManager sessionManager;
     public List<Integer> selectedOrderDetailIds = new ArrayList<>();
+
     public List<Integer> getSelectedOrderDetailIds() {
         return selectedOrderDetailIds;
     }
+
     public OrderedBookAdapter(Context context, List<OrderDetail> orderDetailList) {
         this.context = context;
         this.orderDetailList = orderDetailList;
@@ -91,6 +94,26 @@ public class OrderedBookAdapter extends RecyclerView.Adapter<OrderedBookAdapter.
                     }
                 });
 
+
+            }
+        });
+        holder.btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                executor.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        database.orderDetailDao().deleteOrderDetail(orderDetail);
+
+
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                            }
+                        });
+                    }
+                });
             }
         });
 
@@ -145,7 +168,6 @@ public class OrderedBookAdapter extends RecyclerView.Adapter<OrderedBookAdapter.
         });
 
 
-
     }
 
     @Override
@@ -177,7 +199,6 @@ public class OrderedBookAdapter extends RecyclerView.Adapter<OrderedBookAdapter.
             cartContainer = itemView.findViewById(R.id.cartContainer);
 
         }
-
 
 
         public void addSelectedOrderDetailId(int orderDetailId) {
