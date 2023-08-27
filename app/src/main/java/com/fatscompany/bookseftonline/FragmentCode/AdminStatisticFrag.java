@@ -1,6 +1,6 @@
 package com.fatscompany.bookseftonline.FragmentCode;
 
-import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,32 +11,29 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.fatscompany.bookseftonline.Database.DatabaseAdapter;
-import com.fatscompany.bookseftonline.Database.DatabaseController;
 import com.fatscompany.bookseftonline.AdminActivity;
 import com.fatscompany.bookseftonline.AppDatabase;
+import com.fatscompany.bookseftonline.Entitis.Book;
+import com.fatscompany.bookseftonline.Entitis.OrderDetail;
+import com.fatscompany.bookseftonline.Entitis.SaleOrder;
 import com.fatscompany.bookseftonline.Entitis.User;
 import com.fatscompany.bookseftonline.Entitis.UserData;
 import com.fatscompany.bookseftonline.R;
 import com.fatscompany.bookseftonline.databinding.FragmentAdminStatisticBinding;
 import com.fatscompany.bookseftonline.databinding.UserStatisicLayoutBinding;
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import Adapter.UserAdapter;
 import Adapter.UserStatisticAdapter;
-import Adapter.iClickItemUserListener;
 
 
 public class AdminStatisticFrag extends Fragment {
@@ -50,6 +47,9 @@ public class AdminStatisticFrag extends Fragment {
     private UserStatisticAdapter statisticAdapter;
 
     private UserStatisicLayoutBinding userStatisicBinding;
+
+
+    List<Book> bookList;
 
 
     @Override
@@ -72,7 +72,30 @@ public class AdminStatisticFrag extends Fragment {
                     @Override
                     public void run() {
                         try {
+                            PieChart pieChart = binding.chartBestSaler;
+                            ArrayList<PieEntry> pieEntries = new ArrayList<>();
                             userList = database.userDao().selectAll();
+                            bookList = database.bookDao().getAllBook();
+                            List<OrderDetail> orderDetails = null;
+                            //List<OrderDetail> orderDetails = database.orderDetailDao().getAllOrderDetailByBookId();
+                            for (Book book : bookList){
+                                int i  = database.orderDetailDao().getTotalSoldAmountByBookId(book.getId());
+                                String s = book.getTitle();
+                                if(i > 0){
+                                    pieEntries.add(new PieEntry((float) i, s));
+                                }
+                            }
+                            PieDataSet dataSet = new PieDataSet(pieEntries, "Best Sellers");
+
+                            dataSet.setValueTextSize(12f);
+                            dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+                            dataSet.setValueTextColor(Color.BLACK);
+                            PieData pieData = new PieData(dataSet);
+
+                            pieChart.getDescription().setEnabled(false);
+                            pieChart.setData(pieData);
+                            pieChart.invalidate(); // Refresh the chart
+                            pieChart.animate();
 
                             if(userList==null){
                                 return;
@@ -83,6 +106,8 @@ public class AdminStatisticFrag extends Fragment {
                                 public void run() {
                                     statisticAdapter = new UserStatisticAdapter(getContext(), userList);
                                     rcv.setAdapter(statisticAdapter);
+
+
                                 }
                             });
 

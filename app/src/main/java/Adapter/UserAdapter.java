@@ -94,7 +94,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             userRole = itemView.findViewById(R.id.txtUserRole);
             itemUserLayout = itemView.findViewById(R.id.item_user_layout);
             //userCardView = itemView.findViewById(R.id.itemUser);
-
         }
     }
 

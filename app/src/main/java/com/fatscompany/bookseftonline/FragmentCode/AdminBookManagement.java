@@ -140,7 +140,6 @@ public class AdminBookManagement extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(this.adminActivity);
         builder.setView(successView);
 
-
         TextInputEditText txtTitle = successView.findViewById(R.id.titleEditText);
         TextInputEditText txtDescription = successView.findViewById(R.id.descriptionEditText);
         TextInputEditText txtPrice = successView.findViewById(R.id.priceEditText);
@@ -285,7 +284,6 @@ public class AdminBookManagement extends Fragment {
                             db.bookDao().insert(book);
                         }
                         catch (Exception ex){
-
                         }
                     }
                 });

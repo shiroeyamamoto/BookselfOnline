@@ -50,4 +50,13 @@ public interface BookDAO {
 
     @Query("UPDATE Book SET category_id = null WHERE category_id = :categoryId")
     void updateCategoryToNull(int categoryId);
+
+    @Query("SELECT * FROM Book WHERE id IN (SELECT DISTINCT book_id FROM order_detail)")
+    List<Book> getSoldBooks();
+
+    @Query("SELECT book.*, SUM(order_detail.amount) AS total_amount " +
+            "FROM book " +
+            "INNER JOIN order_detail ON book.id = order_detail.book_id " +
+            "GROUP BY book.id")
+    int getBooksTotalAmount();
 }
