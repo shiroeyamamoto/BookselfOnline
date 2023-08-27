@@ -14,7 +14,7 @@ import androidx.room.PrimaryKey;
         })
 public class Book {
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    private int id;
     @ColumnInfo(name = "title")
     private String title;
     @ColumnInfo(name = "description")
@@ -61,6 +61,10 @@ public class Book {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

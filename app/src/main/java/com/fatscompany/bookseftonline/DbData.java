@@ -249,14 +249,14 @@ public class DbData extends AppCompatActivity {
         AppDatabase database = AppDatabase.getInstance(DbData.this);
 
         //USER
-        User user1 = new User("user1", "pass1", "First 1", "Last 1", "email1@example.com", "123456789", false, "role1");
-        User user2 = new User("user2", "pass2", "First 2", "Last 2", "email2@example.com", "987654321", false, "role2");
-        User user3 = new User("1", "1", "First 2", "Last 2", "email2@example.com", "987654321", false, "role2");
+        User user1 = new User("user1", "pass1", "First 1", "Last 1", "email1@example.com", "123456789", false, "CUSTOMER");
+        User user2 = new User("user2", "pass2", "First 2", "Last 2", "email2@example.com", "987654321", false, "CUSTOMER");
+        User user3 = new User("1", "1", "First 2", "Last 2", "email2@example.com", "987654321", false, "CUSTOMER");
         User user4 = new User("USERTEST", "2", "First 2", "Last 2", "email2@example.com", "987654321", false, "CUSTOMER");
         User user5 = new User("admin", "1", "First 2", "Last 2", "email2@example.com", "987654321", false, "ADMIN");
 
         UserDAO userDao = database.userDao();
-        userDao.insert(user1, user2, user3, user4,user5);
+        userDao.insert(user1, user2, user3, user4, user5);
 
 
         CategoryDAO cateDao = database.categoryDao();
@@ -309,15 +309,15 @@ public class DbData extends AppCompatActivity {
 //        ivo.insertInventory(new Inventory(23, 2));
 //        ivo.insertInventory(new Inventory(33, 3));
 
-       SaleOrderDAO sod = database.saleOrderDao();
-       sod.insertSaleOrder(new SaleOrder(new Date(), 1, "2323" ));
-       sod.insertSaleOrder(new SaleOrder(new Date(), 2, "2323"));
-       sod.insertSaleOrder(new SaleOrder(new Date(), 1, "0909"));
-
-      OrderDetailDAO ord = database.orderDetailDao();
-       ord.insertOrderDetail(new OrderDetail("Order 1", 1, 1, 5));
-        ord.insertOrderDetail(new OrderDetail("Order 2", 2, 1, 3));
-       ord.insertOrderDetail(new OrderDetail("Order 3", 3, 2, 2));
+//       SaleOrderDAO sod = database.saleOrderDao();
+//       sod.insertSaleOrder(new SaleOrder(new Date(), 1, "2323" ));
+//       sod.insertSaleOrder(new SaleOrder(new Date(), 2, "2323"));
+//       sod.insertSaleOrder(new SaleOrder(new Date(), 1, "0909"));
+//
+//      OrderDetailDAO ord = database.orderDetailDao();
+//       ord.insertOrderDetail(new OrderDetail("Order 1", 1, 1, 5));
+//        ord.insertOrderDetail(new OrderDetail("Order 2", 2, 1, 3));
+//       ord.insertOrderDetail(new OrderDetail("Order 3", 3, 2, 2));
     }
 
 }

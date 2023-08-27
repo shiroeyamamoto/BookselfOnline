@@ -6,14 +6,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import com.fatscompany.bookseftonline.DAO.PaymentHistoryDao;
+import com.fatscompany.bookseftonline.Entitis.Book;
 import com.fatscompany.bookseftonline.Entitis.OrderDetail;
+import com.fatscompany.bookseftonline.Entitis.PaymentHistory;
 import com.fatscompany.bookseftonline.Entitis.SaleOrder;
 import com.fatscompany.bookseftonline.databinding.ActivityCartLayoutBinding;
 import com.fatscompany.bookseftonline.databinding.ActivityCategoryBookResultBinding;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -34,6 +40,9 @@ public class CartLayout extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         rcvCart = findViewById(R.id.rcvCart);
+        UserSessionManager sessionManager = new UserSessionManager(this);
+        int currentUser = sessionManager.getUserId();
+        AppDatabase database = AppDatabase.getInstance(CartLayout.this);
         LinearLayoutManager cartLayoutManager = new LinearLayoutManager(CartLayout.this, LinearLayoutManager.VERTICAL, false);
         rcvCart.setLayoutManager(cartLayoutManager);
 
@@ -41,7 +50,7 @@ public class CartLayout extends AppCompatActivity {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                AppDatabase database = AppDatabase.getInstance(CartLayout.this);
+
 
                 UserSessionManager sessionManager = new UserSessionManager(CartLayout.this);
                 int userCurrent = sessionManager.getUserId();
@@ -64,6 +73,38 @@ public class CartLayout extends AppCompatActivity {
                 });
             }
         });
+        binding.btnPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                List<Integer> listCheckBuy = orderedBookAdapter.getSelectedOrderDetailIds();
+                Executor executor = Executors.newSingleThreadExecutor();
+                executor.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (int checkBuyOfOrder : listCheckBuy) {
+                            OrderDetail orderDetailCheckBuy = database.orderDetailDao().getOrderDetailById(checkBuyOfOrder);
+                            Book book = database.bookDao().findBookByID(orderDetailCheckBuy.getBookId());
+
+                            double total = orderDetailCheckBuy.getAmount() * book.getPrice();
+                            Date currentDate = DateTypeConverter.toDate(new Date().getTime());
+
+
+                            PaymentHistory paymentHistory = new PaymentHistory(currentUser, total, orderDetailCheckBuy.getId(), currentDate);
+                            database.paymentHistoryDao().insertPaymentHistory(paymentHistory);
+                            if (paymentHistory != null) {
+                                database.orderDetailDao().deleteOrderDetail(orderDetailCheckBuy);
+
+                            }
+
+                        }
+                    }
+                });
+
+            }
+        });
+
+
     }
 
 
