@@ -16,7 +16,7 @@ public interface BookDAO {
     List<Book> getAllBook();
 
     @Query("SELECT * FROM Book WHERE id=:id")
-    Book findById(String id);
+    Book findById(int id);
 
     @Query("SELECT * FROM Book WHERE title LIKE '%' || :keyword || '%'")
     List<Book> findByTitleContainingKeyword(String keyword);
